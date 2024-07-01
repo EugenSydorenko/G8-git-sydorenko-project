@@ -619,3 +619,4 @@ describe('smoke', () => {
         trainingPage.clickOnChapterCompletionMessage();
     })
 })
+// MR comment
