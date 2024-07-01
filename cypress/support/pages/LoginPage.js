@@ -40,3 +40,5 @@ class LoginPage {
 }
 
 export default new LoginPage();
+
+// MR comment

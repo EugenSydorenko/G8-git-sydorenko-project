@@ -194,3 +194,5 @@ class TrainingPage {
 }
 
 export default new TrainingPage();
+
+// MR comment
