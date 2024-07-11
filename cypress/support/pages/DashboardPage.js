@@ -2,15 +2,16 @@ class DashboardPage {
 
     constructor() {
         this.buttonTrainingSection = 'a[href="/main/training"]';
+        this.timeout = 10000;
     }
 
     visit() {
         cy.log('Open Dashboard page');
-        cy.visit('https://brand-usa-dev.netlify.app/main');
+        cy.visit('/main');
     }
 
     getButtonTrainingSection() {
-        return cy.get(this.buttonTrainingSection);
+        return cy.get(this.buttonTrainingSection, {timeout: this.timeout});
     }
 
     clickButtonTrainingSection() {

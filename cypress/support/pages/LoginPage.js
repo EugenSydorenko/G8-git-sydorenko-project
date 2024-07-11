@@ -4,19 +4,20 @@ class LoginPage {
         this.emailInputField = 'input[type="email"][name="email"]';
         this.passwordInputField = 'input[type="password"][name="password"]';
         this.buttonContinue = 'button[type="submit"].Email__input--button';
+        this.timeout = 10000;
     }
 
     visit() {
         cy.log('Open login page');
-        cy.visit('https://brand-usa-dev.netlify.app/login');
+        cy.visit('/login');
     }
 
     getButtonContinue() {
-        return cy.get(this.buttonContinue);
+        return cy.get(this.buttonContinue, {timeout: this.timeout});
     }
 
     getEmailInputField() {
-        return cy.get(this.emailInputField);
+        return cy.get(this.emailInputField, {timeout: this.timeout});
     }
 
     typeIntoEmailInputField(email){
