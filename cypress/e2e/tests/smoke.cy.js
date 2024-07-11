@@ -45,7 +45,7 @@ describe('Smoke test suite', () => {
             expect(response.status).to.eq(200);
 
             // Store the credentials for use in tests
-            loginData = { email, password };
+            loginData = {email, password};
         });
     });
 
@@ -57,7 +57,10 @@ describe('Smoke test suite', () => {
         loginPage.typeIntoPasswordInputField(loginData.password);
         loginPage.clickButtonContinue();
 
-        cy.wait(5000);
+        // https://accounts.travpromobile.com/api/v2/get_user/?email=eugensydorenko@gmail.com&app_id=1441
+        cy.intercept('https://accounts.travpromobile.com/api/v2/get_user/?email=**').as('loginResponse');
+
+        cy.wait('@loginResponse');
     });
 
     it('Welcome to the USA', () => {
@@ -66,6 +69,7 @@ describe('Smoke test suite', () => {
         dashboardPage.clickButtonTrainingSection();
 
         trainingPage.checkIfVideoAppeared();
+
         cy.wait(5000);
         // Skip the video to the end
         trainingPage.skipTimeToVideoEnd();
