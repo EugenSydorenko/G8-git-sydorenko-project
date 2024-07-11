@@ -3,6 +3,7 @@ import dashboardPage from "../../support/pages/DashboardPage";
 import trainingPage from "../../support/pages/TrainingPage";
 // import loginData from '../../fixtures/loginData.json';
 let loginData;
+
 describe('Smoke test suite', () => {
 
 
@@ -60,7 +61,7 @@ describe('Smoke test suite', () => {
         // https://accounts.travpromobile.com/api/v2/get_user/?email=eugensydorenko@gmail.com&app_id=1441
         cy.intercept('https://accounts.travpromobile.com/api/v2/get_user/?email=**').as('loginResponse');
 
-        cy.wait('@loginResponse');
+        cy.wait('@loginResponse', {timeout: 10000});
     });
 
     it('Welcome to the USA', () => {
@@ -70,7 +71,21 @@ describe('Smoke test suite', () => {
 
         trainingPage.checkIfVideoAppeared();
 
-        cy.wait(5000);
+        // Get the video element by its src attribute and wait for it to be visible
+        cy.get('video[src="https://s3.amazonaws.com/developertool/1441/1713213550-1712955815-chapter1autoplay.mp4"]')
+            .should('be.visible')
+            .then(($video) => {
+                // Ensure the video element has loaded metadata
+                cy.wrap($video).should(($el) => {
+                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
+                });
+
+                // Optionally, wait for the video to start playing
+                // Note: You might need to trigger play manually if autoplay is not working as expected
+                $video[0].play();
+            });
+
+        // cy.wait(5000);
         // Skip the video to the end
         trainingPage.skipTimeToVideoEnd();
 
@@ -78,14 +93,36 @@ describe('Smoke test suite', () => {
 
     it('Discover the Pacific', () => {
         trainingPage.visit();
-        cy.wait(5000);
+
+        // Get the video element by its src attribute and wait for it to be visible
+        cy.get('video[src="https://s3.amazonaws.com/developertool/1441/1713213550-1712955815-chapter1autoplay.mp4"]')
+            .should('be.visible')
+            .then(($video) => {
+                // Ensure the video element has loaded metadata
+                cy.wrap($video).should(($el) => {
+                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
+                });
+            });
+
+
+        // cy.wait(5000);
         trainingPage.skipTimeToVideoEnd();
         cy.wait(5000);
         // Discover the Pacific chapter
         trainingPage.clickOnDiscoverThePacificChapter();
 
+        // Get the video element by its src attribute and wait for it to be visible
+        cy.get('video')
+            .should('be.visible')
+            .then(($video) => {
+                // Ensure the video element has loaded metadata
+                cy.wrap($video).should(($el) => {
+                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
+                });
+            });
+
+
         // Intro Video skip
-        cy.wait(5000);
         trainingPage.skipTimeToVideoEnd();
 
         cy.wait(3000);
@@ -94,11 +131,11 @@ describe('Smoke test suite', () => {
         //Article Welcome To The Pacific
         cy.log('Welcome To The Pacific');
         trainingPage.clickButtonNext();
-        cy.wait(3000);
+
         //Article Alaska
         cy.log('Alaska');
         trainingPage.clickButtonNext();
-        cy.wait(3000);
+
         //Question: Which national park in Alaska is home to North America’s highest peak,
         //as well as a wealth of wildlife like grizzly and black bears?
         trainingPage.clickCorrectAnswer(0);
@@ -144,8 +181,7 @@ describe('Smoke test suite', () => {
         //Check if Chapter Completed button appeared
         trainingPage.checkIfChapterCompletionMessageAppeared();
         trainingPage.clickOnChapterCompletionMessage();
-
-    });
+    })
 
     it.skip('Discover the West', () => {
         trainingPage.visit();

@@ -187,6 +187,17 @@ class TrainingPage {
 
     clickButtonNext() {
         cy.log('Click on button next');
+        cy.wait(5000);
+        // Initial assertion to check the button is in the 'true' state
+        cy.get('button#nextButtontrue.navigationButton.next').should('be.visible');
+
+        // Use `cy.waitUntil` to wait for the button to change to the 'false' state
+        cy.waitUntil(() =>
+            cy.get('button#nextButtonfalse.navigationButton.next').then($button => {
+                return $button.length > 0;
+            })
+        );
+
         return this.getButtonNext().click();
     }
 
