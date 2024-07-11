@@ -1,30 +1,109 @@
 import loginPage from "../../support/pages/LoginPage";
 import dashboardPage from "../../support/pages/DashboardPage";
 import trainingPage from "../../support/pages/TrainingPage";
+// import loginData from '../../fixtures/loginData.json';
+let loginData;
+describe('Smoke test suite', () => {
 
-describe('smoke', () => {
-    it('smoke test 1', () => {
+
+    before(() => {
+        // Generate random credentials
+        const email = `autotest${Date.now()}@testpromobile.com`;
+        const password = 'Password';
+
+        // Make the API request to register a new user
+        cy.request({
+            method: 'POST',
+            url: 'https://login.travpromobile.com/api/register',
+            headers: {
+                'accept': '*/*',
+                'accept-language': 'en-US,en;q=0.9,ru;q=0.8,ru-RU;q=0.7,de;q=0.6,uk;q=0.5',
+                'content-type': 'application/x-www-form-urlencoded',
+                'origin': 'https://brand-usa-dev.netlify.app',
+                'priority': 'u=1, i',
+                'referer': 'https://brand-usa-dev.netlify.app/',
+                'sec-ch-ua': '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
+                'sec-ch-ua-mobile': '?0',
+                'sec-ch-ua-platform': '"Windows"',
+                'sec-fetch-dest': 'empty',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-site': 'cross-site',
+                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+            },
+            body: {
+                client_id: '158',
+                client_secret: 'fJzPJcmq6QxuatXEvHPPnkIXJtCFrnbbXRDFaQxe',
+                name: 'Auto Test',
+                email: email,
+                company: 'agencyName',
+                password: password,
+                password_confirmation: password
+            },
+            form: true
+        }).then((response) => {
+            // Check if the registration was successful
+            expect(response.status).to.eq(200);
+
+            // Store the credentials for use in tests
+            loginData = { email, password };
+        });
+    });
+    // before(() => {
+    //     // Visit the sign-up page and create a new user
+    //     cy.visit('/sign-up');
+    //
+    //     // Generate random credentials
+    //     const email = `autotest${Date.now()}@testpromobile.com`;
+    //     const password = 'Password';
+    //
+    //     // Perform sign-up steps
+    //     cy.get('input[name="email"]').type(email);
+    //     cy.get('input[name="password"]').type(password);
+    //     cy.get('input[name="confirmPassword"]').type(password);
+    //     cy.get('button[type="submit"]').click();
+    //
+    //     // Wait for the sign-up to complete
+    //     cy.get('selector-for-confirmation-message').should('be.visible');
+    //
+    //     // Store the credentials for use in tests
+    //     loginData = {email, password};
+    // });
+
+    beforeEach(() => {
+        //login steps
         loginPage.visit();
-        loginPage.typeIntoEmailInputField('yekave2383@lisoren.com');
+        // loginPage.typeIntoEmailInputField(loginData.user.email);
+        loginPage.typeIntoEmailInputField(loginData.email);
         loginPage.clickButtonContinue();
-        loginPage.typeIntoPasswordInputField('Password');
+        // loginPage.typeIntoPasswordInputField(loginData.user.password);
+        loginPage.typeIntoPasswordInputField(loginData.password);
         loginPage.clickButtonContinue();
 
+        cy.wait(5000);
+    });
+
+    it('Welcome to the USA', () => {
+
+        dashboardPage.visit();
         dashboardPage.clickButtonTrainingSection();
 
         trainingPage.checkIfVideoAppeared();
-
         cy.wait(5000);
-
         // Skip the video to the end
         trainingPage.skipTimeToVideoEnd();
 
-        cy.wait(3000);
+    });
 
+    it('Discover the Pacific', () => {
+        trainingPage.visit();
+        cy.wait(5000);
+        trainingPage.skipTimeToVideoEnd();
+        cy.wait(5000);
         // Discover the Pacific chapter
         trainingPage.clickOnDiscoverThePacificChapter();
 
         // Intro Video skip
+        cy.wait(5000);
         trainingPage.skipTimeToVideoEnd();
 
         cy.wait(3000);
@@ -32,21 +111,18 @@ describe('smoke', () => {
 
         //Article Welcome To The Pacific
         cy.log('Welcome To The Pacific');
-        cy.wait(5000);
         trainingPage.clickButtonNext();
-
+        cy.wait(3000);
         //Article Alaska
         cy.log('Alaska');
-        cy.wait(5000);
         trainingPage.clickButtonNext();
-
+        cy.wait(3000);
         //Question: Which national park in Alaska is home to North America’s highest peak,
         //as well as a wealth of wildlife like grizzly and black bears?
         trainingPage.clickCorrectAnswer(0);
         trainingPage.clickButtonNext();
 
         //Article California
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         //Question: California has vineyards in 48 of its 58 counties and produces what percentage of the USA’s wine supply?
@@ -61,7 +137,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         //Article Hawai’i
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         //Question: Which island has a National Park with five colossal peaks including the dormant Maunakea,
@@ -74,11 +149,9 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         //Article Oregon
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         //Article Washington State
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         //Question: Washington is the only state in the “lower 48” where
@@ -90,6 +163,12 @@ describe('smoke', () => {
         trainingPage.checkIfChapterCompletionMessageAppeared();
         trainingPage.clickOnChapterCompletionMessage();
 
+    });
+
+    it.skip('Discover the West', () => {
+        trainingPage.visit();
+        cy.wait(5000);
+        trainingPage.skipTimeToVideoEnd();
         //Discover the West
         trainingPage.clickOnDiscoverTheWest();
 
@@ -98,11 +177,9 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Welcome To The West
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         //Colorado
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         //Which of the following is NOT a celebrated ski resort in Colorado?
@@ -110,7 +187,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         //Idaho
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         //Idaho has more areas of designated wilderness than anywhere else in the continental USA.
@@ -118,7 +194,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Montana
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which of the following are true statements about Montana? (check all that apply)
@@ -126,7 +201,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         //Nevada
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // The Las Vegas Strip is home to how many of the world’s 25 biggest hotels?
@@ -136,7 +210,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         //North Dakota
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         //Which people embarked on a famous expedition over 200 years ago,
@@ -145,7 +218,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         //South Dakota
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         //Which U.S. presidents are memorialized as carvings on the granite mountainside
@@ -154,7 +226,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Utah
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which are true statements about Lake Powell? (check all that apply)
@@ -162,7 +233,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         //Wyoming
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Wyoming lays claim to three USA firsts. Which of the below statements is NOT a famous first for the state?
@@ -172,7 +242,12 @@ describe('smoke', () => {
         //Check if Chapter Completed button appeared
         trainingPage.checkIfChapterCompletionMessageAppeared();
         trainingPage.clickOnChapterCompletionMessage();
+    });
 
+    it.skip('Discover the Southwest', () => {
+        trainingPage.visit();
+        cy.wait(5000);
+        trainingPage.skipTimeToVideoEnd();
         //Discover the Southwest
         trainingPage.clickOnDiscoverTheSouthwest();
 
@@ -181,11 +256,10 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Welcome To The Southwest
-        cy.wait(5000);
+        //ToDO: remove, fixed timeout
         trainingPage.clickButtonNext();
 
         // Arizona
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which of the following statements are true about the Grand Canyon?
@@ -193,7 +267,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         //New Mexico
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         //Which city would you book for clients interested in Hispanic heritage (Spanish settled here in 1607),
@@ -202,7 +275,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Oklahoma
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Where can visitors get a glimpse of authentic Southwest American history at the National Cowboy
@@ -211,7 +283,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         //Texas
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         //Which Texas city is home to The Alamo, where the landmark battle between Texan
@@ -223,19 +294,24 @@ describe('smoke', () => {
         trainingPage.checkIfChapterCompletionMessageAppeared();
         trainingPage.clickOnChapterCompletionMessage();
 
+    });
+
+    it.skip('Discover the Midwest', () => {
+        trainingPage.visit();
+        cy.wait(5000);
+        trainingPage.skipTimeToVideoEnd();
         //Discover the Midwest
         trainingPage.clickOnDiscoverTheMidwest();
 
         //Video 45 sec
-        cy.wait(50000);
+        trainingPage.skipTimeToVideoEnd()
+        // cy.wait(50000);
         trainingPage.clickButtonNext();
 
         // Welcome To The Midwest
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Illinois
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // What Illinois city was home to the USA’s 16th president, Abraham Lincoln, where visitors can explore his house, tomb, and museum to learn more.
@@ -243,7 +319,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Indiana
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which of the following statements are true about Indiana? (check all that apply)
@@ -251,7 +326,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Iowa
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Iowa offers the essence of Americana with which cultural icons taking place here?
@@ -259,7 +333,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Kansas
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which of the following statements is NOT true about Kansas?
@@ -267,7 +340,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Michigan
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Michigan touches on four of the five Great Lakes. Which one does it not touch?
@@ -275,7 +347,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Minnesota
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // The Mall of America in Bloomington is the largest shopping and entertainment complex in the USA
@@ -288,7 +359,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Nebraska
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // True or false? Omaha marks its top 15 attractions with giant blue push pins placed around the city.
@@ -296,7 +366,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Ohio
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which statements are true about Ohio? (check all that apply)
@@ -304,7 +373,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Wisconsin
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which area of Wisconsin would you send clients to who are looking for
@@ -323,12 +391,16 @@ describe('smoke', () => {
         cy.wait(75000);
         trainingPage.clickButtonNext();
 
-        // Welcome To The Southeast
+    });
+
+    it.skip('Welcome To The Southeast', () => {
+        trainingPage.visit();
         cy.wait(5000);
+        trainingPage.skipTimeToVideoEnd();
+        // Welcome To The Southeast
         trainingPage.clickButtonNext();
 
         // Alabama
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Alabama sits within easy driving distance of other southeastern U.S. hotspots.
@@ -337,7 +409,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Arkansas
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // What natural attraction in Arkansas is ranked among North America’s top ten sites
@@ -346,7 +417,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Florida
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Using Miami as a starting point, which attraction can travelers visit on a road trip heading west across the state?
@@ -354,7 +424,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Georgia
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Atlanta, the capital, offers an abundance of things to see, do, and taste in Georgia.
@@ -363,7 +432,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Kentucky
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // What percentage of the world’s bourbon comes from Kentucky?
@@ -375,7 +443,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Louisiana
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Louisiana is famous for its festivals, more than 400 annually! Which is NOT a festival held here?
@@ -383,7 +450,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Mississippi
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Mississippi is known as the birthplace of American music.
@@ -392,7 +458,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Missouri
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which of the following statements is NOT true about Missouri?
@@ -400,7 +465,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // North Carolina
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // What is the name of the group of narrow barrier islands on North Carolina’s Atlantic coast where
@@ -409,7 +473,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // South Carolina
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which South Carolina destination is not known primarily as a popular golf and beach resort?
@@ -417,7 +480,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Tennessee
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which Tennessee city is home to the Country Music Hall of Fame and the Grand Ole Opry?
@@ -425,7 +487,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Virginia
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Virginia is one of the original 13 colonies and the birthplace of 8 U.S. presidents.
@@ -434,7 +495,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // West Virginia
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // West Virginia is renowned for which types of outdoor recreation?
@@ -445,6 +505,12 @@ describe('smoke', () => {
         trainingPage.checkIfChapterCompletionMessageAppeared();
         trainingPage.clickOnChapterCompletionMessage();
 
+    });
+
+    it.skip('Discover the Northeast', () => {
+        trainingPage.visit();
+        cy.wait(5000);
+        trainingPage.skipTimeToVideoEnd();
         // Discover the Northeast
         trainingPage.clickOnDiscoverTheNortheast();
 
@@ -453,11 +519,9 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Welcome To The Northeast
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Connecticut
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Near what classic New England port will visitors find the expansive casino resort
@@ -466,7 +530,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Delaware
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which of the following is NOT a popular beach resort along the Atlantic coast in Delaware?
@@ -474,7 +537,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Maine
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Almost how much of the nation’s stock of fresh lobster comes from the state of Maine?
@@ -485,7 +547,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Maryland
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which two Maryland cities sit on the Chesapeake Bay, offering thriving city life
@@ -494,7 +555,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Massachusetts
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // At which places can visitors learn more about the crucial role Massachusetts played in the USA’s history?
@@ -502,7 +562,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // New Hampshire
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Portsmouth, a charming waterfront city on the Piscataqua River,
@@ -511,7 +570,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // New Jersey
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which popular New Jersey city offers stunning views of the Manhattan skyline over the Hudson River?
@@ -519,7 +577,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // New York
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which area of New York state, outside of New York City, can visitors find a rugged mountainous and
@@ -528,7 +585,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Pennsylvania
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which of the following statements are true about Philadelphia? (check all that apply)
@@ -536,7 +592,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Rhode Island
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which Rhode Island coastal city was a popular summer resort for wealthy Americans during the late 19th century?
@@ -544,7 +599,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Vermont
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // True or false? Scenic Vermont is the second least-populated state in the entire USA behind Wyoming.
@@ -552,13 +606,18 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Washington, D.C.
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         //Check if Chapter Completed button appeared
         trainingPage.checkIfChapterCompletionMessageAppeared();
         trainingPage.clickOnChapterCompletionMessage();
 
+    });
+
+    it.skip('Discover the Territories', () => {
+        trainingPage.visit();
+        cy.wait(5000);
+        trainingPage.skipTimeToVideoEnd();
         // Discover the Territories
         trainingPage.clickOnDiscoverTheTerritories();
 
@@ -567,11 +626,9 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Welcome To The Territories
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // American Samoa
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // There are more than how many historical sites across tiny American Samoa, including
@@ -582,7 +639,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Guam
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // In what region of Guam will visitors experience the indigenous Chamorro culture at its best?
@@ -590,7 +646,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Northern Mariana Islands
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which activities can visitors to The Marianas enjoy?
@@ -598,7 +653,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // Puerto Rico
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which glowing natural attraction on an outer island of Puerto Rico is best experienced by kayak?
@@ -606,7 +660,6 @@ describe('smoke', () => {
         trainingPage.clickButtonNext();
 
         // U.S. Virgin Islands
-        cy.wait(5000);
         trainingPage.clickButtonNext();
 
         // Which U.S. Virgin Island has the international airport and capital, Charlotte Amalie,
@@ -619,4 +672,3 @@ describe('smoke', () => {
         trainingPage.clickOnChapterCompletionMessage();
     })
 })
-// MR comment
