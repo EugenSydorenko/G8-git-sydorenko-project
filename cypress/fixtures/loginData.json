@@ -1,6 +1,4 @@
 {
-  "user":{
-    "email": "autotest1@testpromobile.com",
-    "password": "Password"
-  }
+  "email": "autotest1@testpromobile.com",
+  "password": "Password"
 }

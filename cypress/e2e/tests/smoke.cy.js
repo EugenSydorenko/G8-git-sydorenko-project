@@ -48,34 +48,12 @@ describe('Smoke test suite', () => {
             loginData = { email, password };
         });
     });
-    // before(() => {
-    //     // Visit the sign-up page and create a new user
-    //     cy.visit('/sign-up');
-    //
-    //     // Generate random credentials
-    //     const email = `autotest${Date.now()}@testpromobile.com`;
-    //     const password = 'Password';
-    //
-    //     // Perform sign-up steps
-    //     cy.get('input[name="email"]').type(email);
-    //     cy.get('input[name="password"]').type(password);
-    //     cy.get('input[name="confirmPassword"]').type(password);
-    //     cy.get('button[type="submit"]').click();
-    //
-    //     // Wait for the sign-up to complete
-    //     cy.get('selector-for-confirmation-message').should('be.visible');
-    //
-    //     // Store the credentials for use in tests
-    //     loginData = {email, password};
-    // });
 
     beforeEach(() => {
         //login steps
         loginPage.visit();
-        // loginPage.typeIntoEmailInputField(loginData.user.email);
         loginPage.typeIntoEmailInputField(loginData.email);
         loginPage.clickButtonContinue();
-        // loginPage.typeIntoPasswordInputField(loginData.user.password);
         loginPage.typeIntoPasswordInputField(loginData.password);
         loginPage.clickButtonContinue();
 
