@@ -1,15 +1,17 @@
 import loginPage from "../../support/pages/LoginPage";
 import dashboardPage from "../../support/pages/DashboardPage";
 import trainingPage from "../../support/pages/TrainingPage";
-// import loginData from '../../fixtures/loginData.json';
+import dayjs from "dayjs";
+
 let loginData;
 
 describe('Smoke test suite', () => {
 
 
     before(() => {
+        const formattedDateTime = dayjs().format('YYYYMMDDHHmmss');
         // Generate random credentials
-        const email = `autotest${Date.now()}@testpromobile.com`;
+        const email = `autotest${formattedDateTime}@testpromobile.com`;
         const password = 'Password';
 
         // Make the API request to register a new user
@@ -79,13 +81,8 @@ describe('Smoke test suite', () => {
                 cy.wrap($video).should(($el) => {
                     expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
                 });
-
-                // Optionally, wait for the video to start playing
-                // Note: You might need to trigger play manually if autoplay is not working as expected
-                $video[0].play();
             });
 
-        // cy.wait(5000);
         // Skip the video to the end
         trainingPage.skipTimeToVideoEnd();
 
@@ -103,11 +100,9 @@ describe('Smoke test suite', () => {
                     expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
                 });
             });
-
-
-        // cy.wait(5000);
-        trainingPage.skipTimeToVideoEnd();
         cy.wait(5000);
+        trainingPage.skipTimeToVideoEnd();
+        cy.wait(7000);
         // Discover the Pacific chapter
         trainingPage.clickOnDiscoverThePacificChapter();
 
@@ -125,7 +120,6 @@ describe('Smoke test suite', () => {
         // Intro Video skip
         trainingPage.skipTimeToVideoEnd();
 
-        cy.wait(3000);
         trainingPage.clickButtonNext();
 
         //Article Welcome To The Pacific
