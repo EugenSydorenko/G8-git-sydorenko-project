@@ -86,7 +86,6 @@ describe('Smoke test suite', () => {
 
         // Skip the video to the end
         trainingPage.skipTimeToVideoEnd();
-
     });
 
     it('Discover the Pacific', () => {
@@ -166,7 +165,6 @@ describe('Smoke test suite', () => {
 
         //Check if Chapter Completed button appeared
         trainingPage.checkIfChapterCompletionMessageAppeared();
-        trainingPage.clickOnChapterCompletionMessage();
     })
 
     it('Discover the West', () => {
@@ -250,12 +248,11 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Wyoming lays claim to three USA firsts. Which of the below statements is NOT a famous first for the state?
-        trainingPage.clickCorrectAnswer(4);
+        trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
         //Check if Chapter Completed button appeared
         trainingPage.checkIfChapterCompletionMessageAppeared();
-        trainingPage.clickOnChapterCompletionMessage();
     });
 
     it('Discover the Southwest', () => {
@@ -279,7 +276,6 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Welcome To The Southwest
-        //ToDO: remove, fixed timeout
         trainingPage.clickButtonNext();
 
         // Arizona
@@ -302,7 +298,7 @@ describe('Smoke test suite', () => {
 
         // Where can visitors get a glimpse of authentic Southwest American history at the National Cowboy
         // and Western Heritage Museum?
-        trainingPage.clickCorrectAnswer(4);
+        trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
         //Texas
@@ -315,7 +311,6 @@ describe('Smoke test suite', () => {
 
         //Check if Chapter Completed button appeared
         trainingPage.checkIfChapterCompletionMessageAppeared();
-        trainingPage.clickOnChapterCompletionMessage();
 
     });
 
@@ -385,7 +380,7 @@ describe('Smoke test suite', () => {
         // 520
         trainingPage.clickWheelTimes(0, 5);
         trainingPage.clickWheelTimes(1, 2);
-        // ToDo: check selector with dev account
+
         trainingPage.clickWheelSubmitButton();
         trainingPage.clickButtonNext();
 
@@ -413,14 +408,6 @@ describe('Smoke test suite', () => {
 
         //Check if Chapter Completed button appeared
         trainingPage.checkIfChapterCompletionMessageAppeared();
-        trainingPage.clickOnChapterCompletionMessage();
-
-        // Discover the Southeast
-        trainingPage.clickOnDiscoverTheSoutheast();
-
-        //Video 1:13 sec
-        cy.wait(75000);
-        trainingPage.clickButtonNext();
 
     });
 
@@ -442,6 +429,8 @@ describe('Smoke test suite', () => {
 
         // Intro Video skip
         trainingPage.skipTimeToVideoEnd();
+        trainingPage.clickButtonNext();
+
         // Welcome To The Southeast
         trainingPage.clickButtonNext();
 
@@ -483,7 +472,7 @@ describe('Smoke test suite', () => {
         // 95
         trainingPage.clickWheelTimes(0, 9);
         trainingPage.clickWheelTimes(1, 5);
-        // ToDo: check selector with dev account
+
         trainingPage.clickWheelSubmitButton();
         trainingPage.clickButtonNext();
 
@@ -506,7 +495,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which of the following statements is NOT true about Missouri?
-        trainingPage.selectItemFromDropDownById(2);
+        trainingPage.selectItemFromDropDownByIndex(3);
         trainingPage.clickButtonNext();
 
         // North Carolina
@@ -548,7 +537,6 @@ describe('Smoke test suite', () => {
 
         //Check if Chapter Completed button appeared
         trainingPage.checkIfChapterCompletionMessageAppeared();
-        trainingPage.clickOnChapterCompletionMessage();
 
     });
 
@@ -570,11 +558,6 @@ describe('Smoke test suite', () => {
 
         // Intro Video skip
         trainingPage.skipTimeToVideoEnd();
-        // Discover the Northeast
-        trainingPage.clickOnDiscoverTheNortheast();
-
-        //Video 1:34
-        cy.wait(95000);
         trainingPage.clickButtonNext();
 
         // Welcome To The Northeast
@@ -585,7 +568,7 @@ describe('Smoke test suite', () => {
 
         // Near what classic New England port will visitors find the expansive casino resort
         // complexes Foxwoods and Mohegan Sun?
-        trainingPage.selectItemFromDropDownById(3);
+        trainingPage.selectItemFromDropDownByIndex(4);
         trainingPage.clickButtonNext();
 
         // Delaware
@@ -669,7 +652,6 @@ describe('Smoke test suite', () => {
 
         //Check if Chapter Completed button appeared
         trainingPage.checkIfChapterCompletionMessageAppeared();
-        trainingPage.clickOnChapterCompletionMessage();
 
     });
 
@@ -702,7 +684,6 @@ describe('Smoke test suite', () => {
         // There are more than how many historical sites across tiny American Samoa, including
         // remains at the world’s busiest airport during WWII?
         trainingPage.clickWheelTimes(0, 6);
-        // ToDo: check selector with dev account
         trainingPage.clickWheelSubmitButton();
         trainingPage.clickButtonNext();
 
@@ -737,6 +718,5 @@ describe('Smoke test suite', () => {
 
         //Check if Chapter Completed button appeared
         trainingPage.checkIfChapterCompletionMessageAppeared();
-        trainingPage.clickOnChapterCompletionMessage();
     })
 })

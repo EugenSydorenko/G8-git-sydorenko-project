@@ -15,7 +15,7 @@ class TrainingPage {
         this.successfulCompletionMessage = 'button#nextButtonfalse.navigationButton.next';
         this.buttonPlus = 'button[id="plus"]';
         this.buttonSubmit = 'button[type="button"]:contains("Submit")';
-        this.wheelSubmitButton = 'button[type="button"]:contains("Submit")';
+        this.wheelSubmitButton = 'button[type="button"]:contains("Confirm your answer")';
         this.timeout = 10000;
         this.debugWaiter = 10000;
     }
@@ -78,7 +78,7 @@ class TrainingPage {
     }
 
     getButtonConfirm() {
-        return cy.contains(this.buttonSlector,'Confirm your answer', {timeout: this.timeout});
+        return cy.contains(this.buttonSlector, 'Confirm your answer', {timeout: this.timeout});
     }
 
     getButtonPlus() {
@@ -118,13 +118,17 @@ class TrainingPage {
 
     }
 
-    selectItemFromDropDownById(id) {
-        cy.log('Selecting item ${id} from dropdown');
-        cy.get('select', {timeout: this.timeout}).then($select => {
-            // Use jQuery to set the selected index
-            $select[0].selectedIndex = id;
-            // Trigger the change event to make sure any associated event listeners are called
-            cy.wrap($select).trigger('change');
+    // Method to log and select item by index
+    selectItemFromDropDownByIndex(index) {
+        cy.log(`Selecting item at index ${index} from dropdown`);
+        cy.get('select', { timeout: this.timeout }).then($select => {
+            cy.wrap($select).invoke('val').then(val => {
+                cy.log(`Current value of select: ${val}`);
+            });
+            cy.wrap($select).children('option').each(($option, optionIndex) => {
+                cy.log(`Option ${optionIndex}: ${$option.text()} (value: ${$option.val()})`);
+            });
+            cy.wrap($select).select(index).trigger('change');
         });
     }
 
@@ -144,11 +148,6 @@ class TrainingPage {
         cy.log(`Checking if chapter completion message appeared`);
         this.getChapterCompletionMessage().should('be.visible')
             .and('have.text', 'Chapter Completed!');
-    }
-
-    clickOnChapterCompletionMessage() {
-        cy.log(`Click on chapter completion message`);
-        this.getChapterCompletionMessage().click();
     }
 
 

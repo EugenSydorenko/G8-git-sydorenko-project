@@ -420,7 +420,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which of the following statements is NOT true about Missouri?
-        trainingPage.selectItemFromDropDownById(2);
+        trainingPage.selectItemFromDropDownByIndex(2);
         trainingPage.clickButtonNext();
 
         // North Carolina
@@ -482,7 +482,7 @@ describe('Smoke test suite', () => {
 
         // Near what classic New England port will visitors find the expansive casino resort
         // complexes Foxwoods and Mohegan Sun?
-        trainingPage.selectItemFromDropDownById(3);
+        trainingPage.selectItemFromDropDownByIndex(3);
         trainingPage.clickButtonNext();
 
         // Delaware
