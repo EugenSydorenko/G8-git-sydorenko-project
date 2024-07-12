@@ -49,6 +49,7 @@ describe('Smoke test suite', () => {
 
             // Store the credentials for use in tests
             loginData = {email, password};
+            cy.log(`registered creds: ${loginData}`);
         });
     });
 
@@ -89,22 +90,10 @@ describe('Smoke test suite', () => {
     });
 
     it('Discover the Pacific', () => {
-        trainingPage.visit();
 
-        // Get the video element by its src attribute and wait for it to be visible
-        cy.get('video[src="https://s3.amazonaws.com/developertool/1441/1713213550-1712955815-chapter1autoplay.mp4"]')
-            .should('be.visible')
-            .then(($video) => {
-                // Ensure the video element has loaded metadata
-                cy.wrap($video).should(($el) => {
-                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
-                });
-            });
+        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3949/0');
+
         cy.wait(5000);
-        trainingPage.skipTimeToVideoEnd();
-        cy.wait(7000);
-        // Discover the Pacific chapter
-        trainingPage.clickOnDiscoverThePacificChapter();
 
         // Get the video element by its src attribute and wait for it to be visible
         cy.get('video')
@@ -123,11 +112,11 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         //Article Welcome To The Pacific
-        cy.log('Welcome To The Pacific');
+        cy.log('Article Welcome To The Pacific');
         trainingPage.clickButtonNext();
 
         //Article Alaska
-        cy.log('Alaska');
+        cy.log('Article Alaska');
         trainingPage.clickButtonNext();
 
         //Question: Which national park in Alaska is home to North America’s highest peak,
@@ -136,6 +125,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         //Article California
+        cy.log('Article California');
         trainingPage.clickButtonNext();
 
         //Question: California has vineyards in 48 of its 58 counties and produces what percentage of the USA’s wine supply?
@@ -146,10 +136,10 @@ describe('Smoke test suite', () => {
         }
         cy.contains('button', 'Confirm your answer').click();
 
-        // cy.get('button[type="button"]').click();
         trainingPage.clickButtonNext();
 
         //Article Hawai’i
+        cy.log('Article Hawai’i');
         trainingPage.clickButtonNext();
 
         //Question: Which island has a National Park with five colossal peaks including the dormant Maunakea,
@@ -157,14 +147,16 @@ describe('Smoke test suite', () => {
         trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
+        //Article Oregon
+        cy.log('Article Oregon');
+        trainingPage.clickButtonNext();
+
         //Question: What is the name of the deepest gorge in North America, which is deeper than the Grand Canyon?
         trainingPage.clickCorrectAnswer(2);
         trainingPage.clickButtonNext();
 
-        //Article Oregon
-        trainingPage.clickButtonNext();
-
         //Article Washington State
+        cy.log('Article Washington State');
         trainingPage.clickButtonNext();
 
         //Question: Washington is the only state in the “lower 48” where
@@ -177,15 +169,25 @@ describe('Smoke test suite', () => {
         trainingPage.clickOnChapterCompletionMessage();
     })
 
-    it.skip('Discover the West', () => {
-        trainingPage.visit();
-        cy.wait(5000);
-        trainingPage.skipTimeToVideoEnd();
-        //Discover the West
-        trainingPage.clickOnDiscoverTheWest();
+    it('Discover the West', () => {
 
-        //Video
-        cy.wait(38000);
+        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3950/0');
+
+        cy.wait(5000);
+
+        // Get the video element by its src attribute and wait for it to be visible
+        cy.get('video')
+            .should('be.visible')
+            .then(($video) => {
+                // Ensure the video element has loaded metadata
+                cy.wrap($video).should(($el) => {
+                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
+                });
+            });
+
+
+        // Intro Video skip
+        trainingPage.skipTimeToVideoEnd();
         trainingPage.clickButtonNext();
 
         // Welcome To The West
@@ -256,15 +258,24 @@ describe('Smoke test suite', () => {
         trainingPage.clickOnChapterCompletionMessage();
     });
 
-    it.skip('Discover the Southwest', () => {
-        trainingPage.visit();
-        cy.wait(5000);
-        trainingPage.skipTimeToVideoEnd();
-        //Discover the Southwest
-        trainingPage.clickOnDiscoverTheSouthwest();
+    it('Discover the Southwest', () => {
+        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3951/0');
 
-        // Video
-        cy.wait(23000);
+        cy.wait(5000);
+
+        // Get the video element by its src attribute and wait for it to be visible
+        cy.get('video')
+            .should('be.visible')
+            .then(($video) => {
+                // Ensure the video element has loaded metadata
+                cy.wrap($video).should(($el) => {
+                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
+                });
+            });
+
+
+        // Intro Video skip
+        trainingPage.skipTimeToVideoEnd();
         trainingPage.clickButtonNext();
 
         // Welcome To The Southwest
@@ -308,16 +319,24 @@ describe('Smoke test suite', () => {
 
     });
 
-    it.skip('Discover the Midwest', () => {
-        trainingPage.visit();
-        cy.wait(5000);
-        trainingPage.skipTimeToVideoEnd();
-        //Discover the Midwest
-        trainingPage.clickOnDiscoverTheMidwest();
+    it('Discover the Midwest', () => {
+        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3952/0');
 
-        //Video 45 sec
-        trainingPage.skipTimeToVideoEnd()
-        // cy.wait(50000);
+        cy.wait(5000);
+
+        // Get the video element by its src attribute and wait for it to be visible
+        cy.get('video')
+            .should('be.visible')
+            .then(($video) => {
+                // Ensure the video element has loaded metadata
+                cy.wrap($video).should(($el) => {
+                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
+                });
+            });
+
+
+        // Intro Video skip
+        trainingPage.skipTimeToVideoEnd();
         trainingPage.clickButtonNext();
 
         // Welcome To The Midwest
@@ -405,9 +424,23 @@ describe('Smoke test suite', () => {
 
     });
 
-    it.skip('Welcome To The Southeast', () => {
-        trainingPage.visit();
+    it('Welcome To The Southeast', () => {
+        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3953/0');
+
         cy.wait(5000);
+
+        // Get the video element by its src attribute and wait for it to be visible
+        cy.get('video')
+            .should('be.visible')
+            .then(($video) => {
+                // Ensure the video element has loaded metadata
+                cy.wrap($video).should(($el) => {
+                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
+                });
+            });
+
+
+        // Intro Video skip
         trainingPage.skipTimeToVideoEnd();
         // Welcome To The Southeast
         trainingPage.clickButtonNext();
@@ -519,9 +552,23 @@ describe('Smoke test suite', () => {
 
     });
 
-    it.skip('Discover the Northeast', () => {
-        trainingPage.visit();
+    it('Discover the Northeast', () => {
+        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3954/0');
+
         cy.wait(5000);
+
+        // Get the video element by its src attribute and wait for it to be visible
+        cy.get('video')
+            .should('be.visible')
+            .then(($video) => {
+                // Ensure the video element has loaded metadata
+                cy.wrap($video).should(($el) => {
+                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
+                });
+            });
+
+
+        // Intro Video skip
         trainingPage.skipTimeToVideoEnd();
         // Discover the Northeast
         trainingPage.clickOnDiscoverTheNortheast();
@@ -626,15 +673,24 @@ describe('Smoke test suite', () => {
 
     });
 
-    it.skip('Discover the Territories', () => {
-        trainingPage.visit();
-        cy.wait(5000);
-        trainingPage.skipTimeToVideoEnd();
-        // Discover the Territories
-        trainingPage.clickOnDiscoverTheTerritories();
+    it('Discover the Territories', () => {
+        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3955/0');
 
-        // Video 42 sec
-        cy.wait(45000);
+        cy.wait(5000);
+
+        // Get the video element by its src attribute and wait for it to be visible
+        cy.get('video')
+            .should('be.visible')
+            .then(($video) => {
+                // Ensure the video element has loaded metadata
+                cy.wrap($video).should(($el) => {
+                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
+                });
+            });
+
+
+        // Intro Video skip
+        trainingPage.skipTimeToVideoEnd();
         trainingPage.clickButtonNext();
 
         // Welcome To The Territories

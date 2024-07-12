@@ -17,6 +17,7 @@ class TrainingPage {
         this.buttonSubmit = 'button[type="button"]:contains("Submit")';
         this.wheelSubmitButton = 'button[type="button"]:contains("Submit")';
         this.timeout = 10000;
+        this.debugWaiter = 10000;
     }
 
     visit() {
@@ -69,15 +70,15 @@ class TrainingPage {
     }
 
     getAnswerByNumber(number) {
-        return cy.get('input[id="${number}"]', {timeout: this.timeout});
+        return cy.get(`input[id="${number}"]`, {timeout: this.timeout});
     }
 
     getWheelByNumber(id) {
-        return cy.get('div[id="${id}"]', {timeout: this.timeout});
+        return cy.get(`div[id="${id}"]`, {timeout: this.timeout});
     }
 
     getButtonConfirm() {
-        return cy.get(this.buttonSlector, {timeout: this.timeout});
+        return cy.contains(this.buttonSlector,'Confirm your answer', {timeout: this.timeout});
     }
 
     getButtonPlus() {
@@ -93,12 +94,13 @@ class TrainingPage {
     }
 
     clickCorrectAnswer(number) {
+        cy.wait(this.debugWaiter);
         cy.log(`clicking on ${number} answer`);
         this.getAnswerByNumber(number).click();
     }
 
     clickNumberTimesButton(number) {
-        cy.log('Clicking button ${number} times');
+        cy.log(`Clicking button ${number} times`);
         for (let i = 0; i < number; i++) {
             this.getButtonPlus().click();
         }
@@ -186,11 +188,8 @@ class TrainingPage {
     }
 
     clickButtonNext() {
+        cy.wait(this.debugWaiter);
         cy.log('Click on button next');
-        cy.wait(5000);
-        // Initial assertion to check the button is in the 'true' state
-        cy.get('button#nextButtontrue.navigationButton.next').should('be.visible');
-
         // Use `cy.waitUntil` to wait for the button to change to the 'false' state
         cy.waitUntil(() =>
             cy.get('button#nextButtonfalse.navigationButton.next').then($button => {
