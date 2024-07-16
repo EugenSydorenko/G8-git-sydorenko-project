@@ -17,7 +17,6 @@ class TrainingPage {
         this.buttonSubmit = 'button[type="button"]:contains("Submit")';
         this.wheelSubmitButton = 'button[type="button"]:contains("Confirm your answer")';
         this.timeout = 10000;
-        this.debugWaiter = 10000;
     }
 
     visit() {
@@ -66,11 +65,16 @@ class TrainingPage {
     }
 
     getButtonNext() {
-        return cy.get(this.buttonNext, {timeout: this.timeout});
+        // Wait until the button with id 'nextButtonfalse' appears, with a timeout of 10 seconds
+        cy.get('#nextButtonfalse', { timeout: this.timeout }).should('exist');
+
+        // Once the button is found, click it
+        return cy.get(this.buttonNext);
     }
 
     getAnswerByNumber(number) {
-        return cy.get(`input[id="${number}"]`, {timeout: this.timeout});
+        cy.get(`input[id="${number}"]`, { timeout: 20000 }).should('exist');
+        return cy.get(`input[id="${number}"]`);
     }
 
     getWheelByNumber(id) {
@@ -94,7 +98,7 @@ class TrainingPage {
     }
 
     clickCorrectAnswer(number) {
-        cy.wait(this.debugWaiter);
+        // cy.wait(this.debugWaiter);
         cy.log(`clicking on ${number} answer`);
         this.getAnswerByNumber(number).click();
     }
@@ -187,14 +191,16 @@ class TrainingPage {
     }
 
     clickButtonNext() {
-        cy.wait(this.debugWaiter);
+        // cy.wait(this.debugWaiter);
+
         cy.log('Click on button next');
+
         // Use `cy.waitUntil` to wait for the button to change to the 'false' state
-        cy.waitUntil(() =>
-            cy.get('button#nextButtonfalse.navigationButton.next').then($button => {
-                return $button.length > 0;
-            })
-        );
+        // cy.waitUntil(() =>
+        //     cy.get('button#nextButtonfalse.navigationButton.next').then($button => {
+        //         return $button.length > 0;
+        //     })
+        // );
 
         return this.getButtonNext().click();
     }

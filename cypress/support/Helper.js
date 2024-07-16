@@ -39,6 +39,22 @@ class Helper {
             return {email, password};
         });
     }
+
+    // Helper method to wait for the button to change its ID and then click it
+    static waitForAndClickNextButton() {
+        // Function to check if the button with the updated ID is present
+        const checkForButtonAndClick = () => {
+            cy.get('body').then($body => {
+                if ($body.find('#nextButtonfalse').length > 0) {
+                    cy.get('#nextButtonfalse').click();
+                } else {
+                    // If the button is not found, retry after a short delay
+                    cy.wait(1000).then(checkForButtonAndClick);
+                }
+
+            })
+        }
+    }
 }
 
 module.exports = Helper;

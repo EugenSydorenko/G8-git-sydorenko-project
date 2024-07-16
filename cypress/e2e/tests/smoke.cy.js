@@ -19,6 +19,11 @@ describe('Smoke test suite', () => {
     beforeEach(() => {
         //login steps
         loginPage.visit();
+
+        cy.intercept('https://graphql.production.groovehq.com/graphql').as('loginPageLoading');
+
+        cy.wait('@loginPageLoading', {timeout: 10000});
+
         loginPage.typeIntoEmailInputField(loginData.email);
         loginPage.clickButtonContinue();
         loginPage.typeIntoPasswordInputField(loginData.password);

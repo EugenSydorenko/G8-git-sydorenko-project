@@ -11,8 +11,6 @@ module.exports = defineConfig({
             allureCypress(on);
         },
         video: true,
-        videoCompression: 32,
-        videosFolder: 'cypress/videos',
-        videoUploadOnPasses: false,
+        videosFolder: 'cypress/videos'
     },
 });
