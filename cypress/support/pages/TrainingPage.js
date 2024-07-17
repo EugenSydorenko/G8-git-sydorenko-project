@@ -16,12 +16,49 @@ class TrainingPage {
         this.buttonPlus = 'button[id="plus"]';
         this.buttonSubmit = 'button[type="button"]:contains("Submit")';
         this.wheelSubmitButton = 'button[type="button"]:contains("Confirm your answer")';
+        this.wheelSubmitButton = 'button[type="button"]:contains("Confirm your answer")';
+        this.urlDiscoverThePacificChapter = '/main/training/chapter/3949/0';
+        this.urlDiscoverTheWestChapter = '/main/training/chapter/3950/0';
+        this.urlDiscoverTheSouthwestChapter = '/main/training/chapter/3951/0';
+        this.urlDiscoverTheMidwestChapter = '/main/training/chapter/3952/0';
+        this.urlDiscoverTheSoutheastChapter = '/main/training/chapter/3953/0';
+        this.urlDiscoverTheNortheastChapter = '/main/training/chapter/3954/0';
+        this.urlDiscoverTheTerritoriesChapter = '/main/training/chapter/3955/0';
         this.timeout = 10000;
     }
 
     visit() {
         cy.log('Open training page');
         cy.visit('/main/training');
+    }
+
+    visitDiscoverThePacificChapter() {
+        cy.log('Open discover The Pacific Chapter');
+        cy.visit(this.urlDiscoverThePacificChapter);
+    }
+    visitDiscoverTheWestChapter() {
+        cy.log('Open discover The West Chapter');
+        cy.visit(this.urlDiscoverTheWestChapter);
+    }
+    visitDiscoverTheSouthwestChapter() {
+        cy.log('Open discover The Southwest Chapter');
+        cy.visit(this.urlDiscoverTheSouthwestChapter);
+    }
+    visitDiscoverTheMidwestChapter() {
+        cy.log('Open discover The Midwest Chapter');
+        cy.visit(this.urlDiscoverTheMidwestChapter);
+    }
+    visitDiscoverTheSoutheastChapter() {
+        cy.log('Open discover The Southeast Chapter');
+        cy.visit(this.urlDiscoverTheSoutheastChapter);
+    }
+    visitDiscoverTheNortheastChapter() {
+        cy.log('Open discover The Northeast Chapter');
+        cy.visit(this.urlDiscoverTheNortheastChapter);
+    }
+    visitDiscoverTheTerritoriesChapter() {
+        cy.log('Open discover The Territories Chapter');
+        cy.visit(this.urlDiscoverTheTerritoriesChapter);
     }
 
     getVideoTrainingSection() {
@@ -65,15 +102,12 @@ class TrainingPage {
     }
 
     getButtonNext() {
-        // Wait until the button with id 'nextButtonfalse' appears, with a timeout of 10 seconds
-        cy.get('#nextButtonfalse', { timeout: this.timeout }).should('exist');
+        cy.wait(10000);
 
-        // Once the button is found, click it
         return cy.get(this.buttonNext);
     }
 
     getAnswerByNumber(number) {
-        cy.get(`input[id="${number}"]`, { timeout: 20000 }).should('exist');
         return cy.get(`input[id="${number}"]`);
     }
 
@@ -98,7 +132,6 @@ class TrainingPage {
     }
 
     clickCorrectAnswer(number) {
-        // cy.wait(this.debugWaiter);
         cy.log(`clicking on ${number} answer`);
         this.getAnswerByNumber(number).click();
     }
@@ -125,7 +158,7 @@ class TrainingPage {
     // Method to log and select item by index
     selectItemFromDropDownByIndex(index) {
         cy.log(`Selecting item at index ${index} from dropdown`);
-        cy.get('select', { timeout: this.timeout }).then($select => {
+        cy.get('select', {timeout: this.timeout}).then($select => {
             cy.wrap($select).invoke('val').then(val => {
                 cy.log(`Current value of select: ${val}`);
             });
@@ -153,7 +186,6 @@ class TrainingPage {
         this.getChapterCompletionMessage().should('be.visible')
             .and('have.text', 'Chapter Completed!');
     }
-
 
     clickOnDiscoverThePacificChapter() {
         cy.log(`Click On Discover The Pacific Chapter`);
@@ -191,17 +223,7 @@ class TrainingPage {
     }
 
     clickButtonNext() {
-        // cy.wait(this.debugWaiter);
-
         cy.log('Click on button next');
-
-        // Use `cy.waitUntil` to wait for the button to change to the 'false' state
-        // cy.waitUntil(() =>
-        //     cy.get('button#nextButtonfalse.navigationButton.next').then($button => {
-        //         return $button.length > 0;
-        //     })
-        // );
-
         return this.getButtonNext().click();
     }
 
@@ -215,6 +237,16 @@ class TrainingPage {
             const video = $video[0];
             video.currentTime = video.duration;
         });
+    }
+
+    checkingIfVideoCanBeSkipped() {
+        return this.getVideo().should('be.visible')
+            .then(($video) => {
+                // Ensure the video element has loaded metadata
+                cy.wrap($video).should(($el) => {
+                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
+                });
+            });
     }
 
 }

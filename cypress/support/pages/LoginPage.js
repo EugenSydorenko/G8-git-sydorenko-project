@@ -4,6 +4,7 @@ class LoginPage {
         this.emailInputField = 'input[type="email"][name="email"]';
         this.passwordInputField = 'input[type="password"][name="password"]';
         this.buttonContinue = 'button[type="submit"].Email__input--button';
+        this.loginPageLoadingApi = 'https://graphql.production.groovehq.com/graphql';
         this.timeout = 10000;
     }
 
@@ -37,6 +38,12 @@ class LoginPage {
     clickButtonContinue() {
         cy.log('Click on continue button');
         return this.getButtonContinue().click();
+    }
+
+    trackingApiToCheckIfLoginPageLoaded() {
+        cy.log(`Intercepting Api endpoint to check if login page fully loaded`);
+        cy.intercept(this.loginPageLoadingApi).as('loginPageLoading');
+        cy.wait('@loginPageLoading', {timeout: this.timeout});
     }
 }
 

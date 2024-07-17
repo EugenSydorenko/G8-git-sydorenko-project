@@ -19,58 +19,34 @@ describe('Smoke test suite', () => {
     beforeEach(() => {
         //login steps
         loginPage.visit();
-
-        cy.intercept('https://graphql.production.groovehq.com/graphql').as('loginPageLoading');
-
-        cy.wait('@loginPageLoading', {timeout: 10000});
+        loginPage.trackingApiToCheckIfLoginPageLoaded();
 
         loginPage.typeIntoEmailInputField(loginData.email);
         loginPage.clickButtonContinue();
         loginPage.typeIntoPasswordInputField(loginData.password);
         loginPage.clickButtonContinue();
 
-        cy.intercept('https://accounts.travpromobile.com/api/v2/get_user/?email=**').as('loginResponse');
+        dashboardPage.trackingApiToCheckIfDashboardPageLoaded();
 
-        cy.wait('@loginResponse', {timeout: 10000});
     });
 
     it('Welcome to the USA', () => {
-
         dashboardPage.visit();
         dashboardPage.clickButtonTrainingSection();
 
         trainingPage.checkIfVideoAppeared();
+        trainingPage.checkingIfVideoCanBeSkipped();
 
-        // Get the video element by its src attribute and wait for it to be visible
-        cy.get('video[src="https://s3.amazonaws.com/developertool/1441/1713213550-1712955815-chapter1autoplay.mp4"]')
-            .should('be.visible')
-            .then(($video) => {
-                // Ensure the video element has loaded metadata
-                cy.wrap($video).should(($el) => {
-                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
-                });
-            });
-
-        // Skip the video to the end
         trainingPage.skipTimeToVideoEnd();
     });
 
     it('Discover the Pacific', () => {
-
-        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3949/0');
+        trainingPage.visitDiscoverThePacificChapter()
 
         cy.wait(5000);
 
         // Get the video element by its src attribute and wait for it to be visible
-        cy.get('video')
-            .should('be.visible')
-            .then(($video) => {
-                // Ensure the video element has loaded metadata
-                cy.wrap($video).should(($el) => {
-                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
-                });
-            });
-
+        trainingPage.checkingIfVideoCanBeSkipped();
 
         // Intro Video skip
         trainingPage.skipTimeToVideoEnd();
@@ -97,10 +73,9 @@ describe('Smoke test suite', () => {
         //Question: California has vineyards in 48 of its 58 counties and produces what percentage of the USA’s wine supply?
 
         // Click the element 9 times
-        for (let i = 0; i < 9; i++) {
-            cy.get('div.dial[id="0"][role="button"]').click();
-        }
-        cy.contains('button', 'Confirm your answer').click();
+        trainingPage.clickWheelTimes(0, 9);
+
+        trainingPage.clickWheelSubmitButton();
 
         trainingPage.clickButtonNext();
 
@@ -135,21 +110,11 @@ describe('Smoke test suite', () => {
     })
 
     it('Discover the West', () => {
-
-        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3950/0');
+        trainingPage.visitDiscoverTheWestChapter();
 
         cy.wait(5000);
 
-        // Get the video element by its src attribute and wait for it to be visible
-        cy.get('video')
-            .should('be.visible')
-            .then(($video) => {
-                // Ensure the video element has loaded metadata
-                cy.wrap($video).should(($el) => {
-                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
-                });
-            });
-
+        trainingPage.checkingIfVideoCanBeSkipped();
 
         // Intro Video skip
         trainingPage.skipTimeToVideoEnd();
@@ -184,7 +149,7 @@ describe('Smoke test suite', () => {
 
         // The Las Vegas Strip is home to how many of the world’s 25 biggest hotels?
         trainingPage.clickNumberTimesButton(7);
-        // ToDo: check selector with dev account
+
         trainingPage.clickOnSubmitButton();
         trainingPage.clickButtonNext();
 
@@ -223,20 +188,12 @@ describe('Smoke test suite', () => {
     });
 
     it('Discover the Southwest', () => {
-        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3951/0');
+        trainingPage.visitDiscoverTheSouthwestChapter();
+        cy.visit('/main/training/chapter/3951/0');
 
         cy.wait(5000);
 
-        // Get the video element by its src attribute and wait for it to be visible
-        cy.get('video')
-            .should('be.visible')
-            .then(($video) => {
-                // Ensure the video element has loaded metadata
-                cy.wrap($video).should(($el) => {
-                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
-                });
-            });
-
+        trainingPage.checkingIfVideoCanBeSkipped();
 
         // Intro Video skip
         trainingPage.skipTimeToVideoEnd();
@@ -282,20 +239,11 @@ describe('Smoke test suite', () => {
     });
 
     it('Discover the Midwest', () => {
-        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3952/0');
+        trainingPage.visitDiscoverTheMidwestChapter();
 
         cy.wait(5000);
 
-        // Get the video element by its src attribute and wait for it to be visible
-        cy.get('video')
-            .should('be.visible')
-            .then(($video) => {
-                // Ensure the video element has loaded metadata
-                cy.wrap($video).should(($el) => {
-                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
-                });
-            });
-
+        trainingPage.checkingIfVideoCanBeSkipped();
 
         // Intro Video skip
         trainingPage.skipTimeToVideoEnd();
@@ -379,20 +327,11 @@ describe('Smoke test suite', () => {
     });
 
     it('Welcome To The Southeast', () => {
-        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3953/0');
+        trainingPage.visitDiscoverTheSoutheastChapter();
 
         cy.wait(5000);
 
-        // Get the video element by its src attribute and wait for it to be visible
-        cy.get('video')
-            .should('be.visible')
-            .then(($video) => {
-                // Ensure the video element has loaded metadata
-                cy.wrap($video).should(($el) => {
-                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
-                });
-            });
-
+        trainingPage.checkingIfVideoCanBeSkipped();
 
         // Intro Video skip
         trainingPage.skipTimeToVideoEnd();
@@ -508,20 +447,11 @@ describe('Smoke test suite', () => {
     });
 
     it('Discover the Northeast', () => {
-        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3954/0');
+        trainingPage.visitDiscoverTheNortheastChapter();
 
         cy.wait(5000);
 
-        // Get the video element by its src attribute and wait for it to be visible
-        cy.get('video')
-            .should('be.visible')
-            .then(($video) => {
-                // Ensure the video element has loaded metadata
-                cy.wrap($video).should(($el) => {
-                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
-                });
-            });
-
+        trainingPage.checkingIfVideoCanBeSkipped();
 
         // Intro Video skip
         trainingPage.skipTimeToVideoEnd();
@@ -551,7 +481,7 @@ describe('Smoke test suite', () => {
         // Almost how much of the nation’s stock of fresh lobster comes from the state of Maine?
         // 90
         trainingPage.clickWheelTimes(0, 9);
-        // ToDo: check selector with dev account
+
         trainingPage.clickWheelSubmitButton();
         trainingPage.clickButtonNext();
 
@@ -623,20 +553,11 @@ describe('Smoke test suite', () => {
     });
 
     it('Discover the Territories', () => {
-        cy.visit('https://brand-usa-dev.netlify.app/main/training/chapter/3955/0');
+        trainingPage.visitDiscoverTheTerritoriesChapter();
 
         cy.wait(5000);
 
-        // Get the video element by its src attribute and wait for it to be visible
-        cy.get('video')
-            .should('be.visible')
-            .then(($video) => {
-                // Ensure the video element has loaded metadata
-                cy.wrap($video).should(($el) => {
-                    expect($el[0].readyState).to.be.gte(1); // HAVE_METADATA is 1
-                });
-            });
-
+        trainingPage.checkingIfVideoCanBeSkipped();
 
         // Intro Video skip
         trainingPage.skipTimeToVideoEnd();
