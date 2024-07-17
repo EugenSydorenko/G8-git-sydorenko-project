@@ -1,6 +1,7 @@
 import loginPage from "../../support/pages/LoginPage";
 import dashboardPage from "../../support/pages/DashboardPage";
 import trainingPage from "../../support/pages/TrainingPage";
+
 const Helper = require('../../support/Helper');
 
 let loginData;
@@ -189,7 +190,6 @@ describe('Smoke test suite', () => {
 
     it('Discover the Southwest', () => {
         trainingPage.visitDiscoverTheSouthwestChapter();
-        cy.visit('/main/training/chapter/3951/0');
 
         cy.wait(5000);
 
@@ -230,7 +230,7 @@ describe('Smoke test suite', () => {
 
         //Which Texas city is home to The Alamo, where the landmark battle between Texan
         // fighters and Mexico occurred in 1836 ?
-        cy.get('img[id="2"]').click();
+        trainingPage.clickOnSecondImage();
         trainingPage.clickButtonNext();
 
         //Check if Chapter Completed button appeared

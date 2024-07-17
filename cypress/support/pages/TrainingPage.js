@@ -24,6 +24,7 @@ class TrainingPage {
         this.urlDiscoverTheSoutheastChapter = '/main/training/chapter/3953/0';
         this.urlDiscoverTheNortheastChapter = '/main/training/chapter/3954/0';
         this.urlDiscoverTheTerritoriesChapter = '/main/training/chapter/3955/0';
+        this.secondImageQuestionAnswer = 'img[id="2"]';
         this.timeout = 10000;
     }
 
@@ -36,26 +37,32 @@ class TrainingPage {
         cy.log('Open discover The Pacific Chapter');
         cy.visit(this.urlDiscoverThePacificChapter);
     }
+
     visitDiscoverTheWestChapter() {
         cy.log('Open discover The West Chapter');
         cy.visit(this.urlDiscoverTheWestChapter);
     }
+
     visitDiscoverTheSouthwestChapter() {
         cy.log('Open discover The Southwest Chapter');
         cy.visit(this.urlDiscoverTheSouthwestChapter);
     }
+
     visitDiscoverTheMidwestChapter() {
         cy.log('Open discover The Midwest Chapter');
         cy.visit(this.urlDiscoverTheMidwestChapter);
     }
+
     visitDiscoverTheSoutheastChapter() {
         cy.log('Open discover The Southeast Chapter');
         cy.visit(this.urlDiscoverTheSoutheastChapter);
     }
+
     visitDiscoverTheNortheastChapter() {
         cy.log('Open discover The Northeast Chapter');
         cy.visit(this.urlDiscoverTheNortheastChapter);
     }
+
     visitDiscoverTheTerritoriesChapter() {
         cy.log('Open discover The Territories Chapter');
         cy.visit(this.urlDiscoverTheTerritoriesChapter);
@@ -71,6 +78,10 @@ class TrainingPage {
 
     getDiscoverThePacificChapter() {
         return cy.get(this.discoverThePacificChapter, {timeout: this.timeout});
+    }
+
+    getSecondImageQuestionAnswer() {
+        return cy.get(this.secondImageQuestionAnswer, {timeout: this.timeout});
     }
 
     getDiscoverTheSouthwest() {
@@ -134,6 +145,11 @@ class TrainingPage {
     clickCorrectAnswer(number) {
         cy.log(`clicking on ${number} answer`);
         this.getAnswerByNumber(number).click();
+    }
+
+    clickOnSecondImage() {
+        cy.log(`clicking on second image`);
+        this.getSecondImageQuestionAnswer().click();
     }
 
     clickNumberTimesButton(number) {
