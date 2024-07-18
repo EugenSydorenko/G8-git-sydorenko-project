@@ -26,6 +26,7 @@ class TrainingPage {
         this.urlDiscoverTheTerritoriesChapter = '/main/training/chapter/3955/0';
         this.secondImageQuestionAnswer = 'img[id="2"]';
         this.articleTitle = 'h3.pageTitle.false';
+        this.questionTitle = 'h4.container__title';
         this.timeout = 20000;
     }
 
@@ -78,12 +79,14 @@ class TrainingPage {
         return cy.get(this.videoSelector);
     }
 
-    getArticleTitle(title) {
-        cy.get(this.articleTitle, {timeout: this.timeout})
-            .should('exist');
-        cy.get(this.articleTitle, {timeout: this.timeout}).contains(title, {timeout: this.timeout})
-            .should('be.visible');
+    getArticleTitle() {
+        cy.get(this.articleTitle, {timeout: this.timeout});
         return cy.get(this.articleTitle);
+    }
+
+    getQuestionTitle() {
+        cy.get(this.questionTitle, {timeout: this.timeout});
+        return cy.get(this.questionTitle);
     }
 
     getDiscoverThePacificChapter() {
@@ -123,6 +126,7 @@ class TrainingPage {
     }
 
     getButtonNext() {
+        cy.wait(7000);
         return cy.get(this.buttonNext, {timeout: this.timeout});
     }
 
@@ -174,17 +178,39 @@ class TrainingPage {
         }
     }
 
-    checkIfArticleAppeared(title) {
-        cy.log(`Checking if article ${title} appeared`);
-        return this.getArticleTitle(title).should('be.visible');
+    checkIfArticleAppeared(expectedTitle) {
+        cy.log(`Checking if article "${expectedTitle}" appeared`);
+
+        this.getArticleTitle().then(($title) => {
+            const actualTitle = $title.text().trim();
+
+            if (actualTitle !== expectedTitle) {
+                cy.log(`Expected title: "${expectedTitle}", but found: "${actualTitle}"`);
+            }
+
+            expect(actualTitle).to.equal(expectedTitle);
+        });
+    }
+
+    checkIfQuestionAppeared(expectedTitle) {
+
+        cy.log(`Checking if question "${expectedTitle}" appeared`);
+
+        this.getQuestionTitle().then(($title) => {
+            const actualTitle = $title.text().trim();
+
+            if (actualTitle !== expectedTitle) {
+                cy.log(`Expected title: "${expectedTitle}", but found: "${actualTitle}"`);
+            }
+
+            expect(actualTitle).to.equal(expectedTitle);
+        });
     }
 
     clickWheelSubmitButton() {
         this.getWheelSubmitButton().click();
-
     }
 
-    // Method to log and select item by index
     selectItemFromDropDownByIndex(index) {
         cy.log(`Selecting item at index ${index} from dropdown`);
         cy.get('select', {timeout: this.timeout}).then($select => {

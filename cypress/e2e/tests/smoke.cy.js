@@ -48,7 +48,7 @@ describe('Smoke test suite', () => {
         trainingPage.skipTimeToVideoEnd();
         trainingPage.clickButtonNext();
 
-        //Article Welcome To The Pacific
+        //Article Welcome to the Pacific
         trainingPage.checkIfArticleAppeared('Welcome to the Pacific');
         trainingPage.clickButtonNext();
 
@@ -59,6 +59,7 @@ describe('Smoke test suite', () => {
         //Question: Which national park in Alaska is home to North America’s highest peak,
         //as well as a wealth of wildlife like grizzly and black bears?
 
+        trainingPage.checkIfQuestionAppeared('Which national park in Alaska is home to North America’s highest peak, as well as a wealth of wildlife like grizzly and black bears?');
         trainingPage.clickCorrectAnswer(0);
         trainingPage.clickButtonNext();
 
@@ -69,6 +70,7 @@ describe('Smoke test suite', () => {
         //Question: California has vineyards in 48 of its 58 counties and produces what percentage of the USA’s wine supply?
 
         // Click the element 9 times
+        trainingPage.checkIfQuestionAppeared('California has vineyards in 48 of its 58 counties and produces what percentage of the USA\'s wine supply?');
         trainingPage.clickWheelTimes(0, 9);
 
         trainingPage.clickWheelSubmitButton();
@@ -81,6 +83,7 @@ describe('Smoke test suite', () => {
 
         //Question: Which island has a National Park with five colossal peaks including the dormant Maunakea,
         // where visitors can hike and ski.
+        trainingPage.checkIfQuestionAppeared('Which island has a National Park with five colossal peaks including the dormant Maunakea, where visitors can hike and ski.');
         trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
@@ -89,6 +92,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         //Question: What is the name of the deepest gorge in North America, which is deeper than the Grand Canyon?
+        trainingPage.checkIfQuestionAppeared('What is the name of the deepest gorge in North America, which is deeper than the Grand Canyon?');
         trainingPage.clickCorrectAnswer(2);
         trainingPage.clickButtonNext();
 
@@ -98,6 +102,7 @@ describe('Smoke test suite', () => {
 
         //Question: Washington is the only state in the “lower 48” where
         // visitors can do which of the following all in one day?
+        trainingPage.checkIfQuestionAppeared('Washington is the only state in the “lower 48” where visitors can do which of the following all in one day? (check all that apply)');
         trainingPage.clickOnEachAnswer(0, 1, 2);
         trainingPage.clickButtonNext();
 
@@ -114,8 +119,8 @@ describe('Smoke test suite', () => {
         trainingPage.skipTimeToVideoEnd();
         trainingPage.clickButtonNext();
 
-        // Welcome To The West
-        trainingPage.checkIfArticleAppeared('Welcome To The West');
+        // Welcome to the West
+        trainingPage.checkIfArticleAppeared('Welcome to the West');
         trainingPage.clickButtonNext();
 
         //Colorado
@@ -123,6 +128,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         //Which of the following is NOT a celebrated ski resort in Colorado?
+        trainingPage.checkIfQuestionAppeared('Which of the following is NOT a celebrated ski resort in Colorado?');
         trainingPage.clickCorrectAnswer(2);
         trainingPage.clickButtonNext();
 
@@ -131,6 +137,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         //Idaho has more areas of designated wilderness than anywhere else in the continental USA.
+        trainingPage.checkIfQuestionAppeared('Idaho has more areas of designated wilderness than anywhere else in the continental USA.');
         trainingPage.clickCorrectAnswer(0);
         trainingPage.clickButtonNext();
 
@@ -139,6 +146,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which of the following are true statements about Montana? (check all that apply)
+        trainingPage.checkIfQuestionAppeared('Which of the following are true statements about Montana? (check all that apply)');
         trainingPage.clickOnEachAnswer(0, 1, 2, 3);
         trainingPage.clickButtonNext();
 
@@ -147,6 +155,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // The Las Vegas Strip is home to how many of the world’s 25 biggest hotels?
+        trainingPage.checkIfQuestionAppeared('The Las Vegas Strip is home to how many of the world’s 25 biggest hotels (based on number of rooms)?');
         trainingPage.clickNumberTimesButton(7);
 
         trainingPage.clickOnSubmitButton();
@@ -158,6 +167,7 @@ describe('Smoke test suite', () => {
 
         //Which people embarked on a famous expedition over 200 years ago,
         // on a trail that can now be followed by visitors?
+        trainingPage.checkIfQuestionAppeared('Which people embarked on a famous expedition over 200 years ago, on a trail that can now be followed by visitors? (check all that apply)');
         trainingPage.clickOnEachAnswer(1, 2);
         trainingPage.clickButtonNext();
 
@@ -167,6 +177,7 @@ describe('Smoke test suite', () => {
 
         //Which U.S. presidents are memorialized as carvings on the granite mountainside
         // of South Dakota’s international landmark, Mount Rushmore National Memorial?
+        trainingPage.checkIfQuestionAppeared('Which U.S. presidents are memorialized as carvings on the granite mountainside of South Dakota’s international landmark, Mount Rushmore National Memorial?');
         trainingPage.clickCorrectAnswer(4);
         trainingPage.clickButtonNext();
 
@@ -175,6 +186,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which are true statements about Lake Powell? (check all that apply)
+        trainingPage.checkIfQuestionAppeared('Which are true statements about Lake Powell? (check all that apply)');
         trainingPage.clickOnEachAnswer(1, 2, 4);
         trainingPage.clickButtonNext();
 
@@ -183,6 +195,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Wyoming lays claim to three USA firsts. Which of the below statements is NOT a famous first for the state?
+        trainingPage.checkIfQuestionAppeared('Wyoming lays claim to three USA firsts. Which of the below statements is NOT a famous first for the state?');
         trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
@@ -199,8 +212,8 @@ describe('Smoke test suite', () => {
         trainingPage.skipTimeToVideoEnd();
         trainingPage.clickButtonNext();
 
-        // Welcome To The Southwest
-        trainingPage.checkIfArticleAppeared('Welcome To The Southwest');
+        // Welcome to the Southwest
+        trainingPage.checkIfArticleAppeared('Welcome to the Southwest');
         trainingPage.clickButtonNext();
 
         // Arizona
@@ -208,6 +221,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which of the following statements are true about the Grand Canyon?
+        trainingPage.checkIfQuestionAppeared('Which of the following statements are true about the Grand Canyon? (check all that apply)');
         trainingPage.clickOnEachAnswer(1, 2, 3);
         trainingPage.clickButtonNext();
 
@@ -217,6 +231,7 @@ describe('Smoke test suite', () => {
 
         //Which city would you book for clients interested in Hispanic heritage (Spanish settled here in 1607),
         // visual arts, and spicy southwestern cuisine?
+        trainingPage.checkIfQuestionAppeared('Which city would you book for clients interested in Hispanic heritage (Spanish settled here in 1607), visual arts, and spicy southwestern cuisine?');
         trainingPage.clickCorrectAnswer(1);
         trainingPage.clickButtonNext();
 
@@ -226,6 +241,7 @@ describe('Smoke test suite', () => {
 
         // Where can visitors get a glimpse of authentic Southwest American history at the National Cowboy
         // and Western Heritage Museum?
+        trainingPage.checkIfQuestionAppeared('Where can visitors get a glimpse of authentic Southwest American history at the National Cowboy and Western Heritage Museum?');
         trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
@@ -233,8 +249,9 @@ describe('Smoke test suite', () => {
         trainingPage.checkIfArticleAppeared('Texas');
         trainingPage.clickButtonNext();
 
-        //Which Texas city is home to The Alamo, where the landmark battle between Texan
+        //Which Texas city is home to the Alamo, where the landmark battle between Texan
         // fighters and Mexico occurred in 1836 ?
+        // trainingPage.checkIfQuestionAppeared('**Which Texas city is home to the Alamo, where the landmark battle between Texan fighters and Mexico occurred in 1836 ?**');
         trainingPage.clickOnSecondImage();
         trainingPage.clickButtonNext();
 
@@ -252,8 +269,8 @@ describe('Smoke test suite', () => {
         trainingPage.skipTimeToVideoEnd();
         trainingPage.clickButtonNext();
 
-        // Welcome To The Midwest
-        trainingPage.checkIfArticleAppeared('Welcome To The Midwest');
+        // Welcome to the Midwest
+        trainingPage.checkIfArticleAppeared('Welcome to the Midwest');
         trainingPage.clickButtonNext();
 
         // Illinois
@@ -261,6 +278,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // What Illinois city was home to the USA’s 16th president, Abraham Lincoln, where visitors can explore his house, tomb, and museum to learn more.
+        trainingPage.checkIfQuestionAppeared('What Illinois city was home to the USA’s 16th president, Abraham Lincoln, where visitors can explore his house, tomb, and museum to learn more.');
         trainingPage.clickCorrectAnswer(2);
         trainingPage.clickButtonNext();
 
@@ -269,6 +287,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which of the following statements are true about Indiana? (check all that apply)
+        trainingPage.checkIfQuestionAppeared('Which of the following statements are true about Indiana? (check all that apply)');
         trainingPage.clickOnEachAnswer(0, 1, 2, 4);
         trainingPage.clickButtonNext();
 
@@ -277,6 +296,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Iowa offers the essence of Americana with which cultural icons taking place here?
+        trainingPage.checkIfQuestionAppeared('Iowa offers the essence of Americana with which cultural icons taking place here?');
         trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
@@ -285,6 +305,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which of the following statements is NOT true about Kansas?
+        trainingPage.checkIfQuestionAppeared('Which of the following statements is NOT true about Kansas?');
         trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
@@ -293,6 +314,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Michigan touches on four of the five Great Lakes. Which one does it not touch?
+        trainingPage.checkIfQuestionAppeared('Michigan touches on four of the five Great Lakes. Which one does it not touch?');
         trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
@@ -303,6 +325,7 @@ describe('Smoke test suite', () => {
         // The Mall of America in Bloomington is the largest shopping and entertainment complex in the USA
         // with more than how many stores and restaurants?
         // 520
+        trainingPage.checkIfQuestionAppeared('The Mall of America in Bloomington is the largest shopping and entertainment complex in the USA with more than how many stores and restaurants?');
         trainingPage.clickWheelTimes(0, 5);
         trainingPage.clickWheelTimes(1, 2);
 
@@ -314,6 +337,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // True or false? Omaha marks its top 15 attractions with giant blue push pins placed around the city.
+        trainingPage.checkIfQuestionAppeared('True or false? Omaha marks its top 15 attractions with giant blue push pins placed around the city.');
         trainingPage.clickCorrectAnswer(0);
         trainingPage.clickButtonNext();
 
@@ -322,6 +346,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which statements are true about Ohio? (check all that apply)
+        trainingPage.checkIfQuestionAppeared('Which statements are true about Ohio? (check all that apply)');
         trainingPage.clickOnEachAnswer(0, 1, 2, 3);
         trainingPage.clickButtonNext();
 
@@ -331,6 +356,7 @@ describe('Smoke test suite', () => {
 
         // Which area of Wisconsin would you send clients to who are looking for
         // a “Cape Cod” small-town waterfront experience?
+        trainingPage.checkIfQuestionAppeared('Which area of Wisconsin would you send clients to who are looking for a “Cape Cod” small-town waterfront experience?');
         trainingPage.clickCorrectAnswer(0);
         trainingPage.clickButtonNext();
 
@@ -339,15 +365,15 @@ describe('Smoke test suite', () => {
 
     });
 
-    it('Welcome To The Southeast', () => {
+    it('Welcome to the Southeast', () => {
         trainingPage.visitDiscoverTheSoutheastChapter();
 
         trainingPage.checkingIfVideoCanBeSkipped();
         trainingPage.skipTimeToVideoEnd();
         trainingPage.clickButtonNext();
 
-        // Welcome To The Southeast
-        trainingPage.checkIfArticleAppeared('Welcome To The Southeast');
+        // Welcome to the Southeast
+        trainingPage.checkIfArticleAppeared('Welcome to the Southeast');
         trainingPage.clickButtonNext();
 
         // Alabama
@@ -356,6 +382,7 @@ describe('Smoke test suite', () => {
 
         // Alabama sits within easy driving distance of other southeastern U.S. hotspots.
         // Which three cities outside of Alabama would make an easy road trip?
+        trainingPage.checkIfQuestionAppeared('Alabama sits within easy driving distance of other southeastern U.S. hotspots. Which three cities outside of Alabama would make an easy road trip?');
         trainingPage.clickOnEachAnswer(0, 1, 2);
         trainingPage.clickButtonNext();
 
@@ -365,6 +392,7 @@ describe('Smoke test suite', () => {
 
         // What natural attraction in Arkansas is ranked among North America’s top ten sites
         // for features like its spectacular stalactites?
+        trainingPage.checkIfQuestionAppeared('What natural attraction in Arkansas is ranked among North America’s top ten sites for features like its spectacular stalactites?');
         trainingPage.clickCorrectAnswer(2);
         trainingPage.clickButtonNext();
 
@@ -373,6 +401,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Using Miami as a starting point, which attraction can travelers visit on a road trip heading west across the state?
+        trainingPage.checkIfQuestionAppeared('Using Miami as a starting point, which attraction can travelers visit on a road trip heading west across the state?');
         trainingPage.clickCorrectAnswer(2);
         trainingPage.clickButtonNext();
 
@@ -382,6 +411,7 @@ describe('Smoke test suite', () => {
 
         // Atlanta, the capital, offers an abundance of things to see, do, and taste in Georgia.
         // Which two sites should be at the top of any visitor’s list?
+        trainingPage.checkIfQuestionAppeared('Atlanta, the capital, offers an abundance of things to see, do, and taste in Georgia. Which two sites should be at the top of any visitor’s list? (check all that apply)');
         trainingPage.clickOnEachAnswer(1, 2);
         trainingPage.clickButtonNext();
 
@@ -391,6 +421,7 @@ describe('Smoke test suite', () => {
 
         // What percentage of the world’s bourbon comes from Kentucky?
         // 95
+        trainingPage.checkIfQuestionAppeared('What percentage of the world’s bourbon comes from Kentucky?');
         trainingPage.clickWheelTimes(0, 9);
         trainingPage.clickWheelTimes(1, 5);
 
@@ -402,6 +433,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Louisiana is famous for its festivals, more than 400 annually! Which is NOT a festival held here?
+        trainingPage.checkIfQuestionAppeared('Louisiana is famous for its festivals, more than 400 annually! Which is NOT a festival held here?');
         trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
@@ -411,6 +443,7 @@ describe('Smoke test suite', () => {
 
         // Mississippi is known as the birthplace of American music.
         // Which landmarks here can be visited by music lovers?
+        trainingPage.checkIfQuestionAppeared('Mississippi is known as the birthplace of American music. Which landmarks here can be visited by music lovers?');
         trainingPage.clickCorrectAnswer(4);
         trainingPage.clickButtonNext();
 
@@ -419,6 +452,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which of the following statements is NOT true about Missouri?
+        // trainingPage.checkIfQuestionAppeared('Which of the following statements is NOT true about Missouri?');
         trainingPage.selectItemFromDropDownByIndex(3);
         trainingPage.clickButtonNext();
 
@@ -428,6 +462,7 @@ describe('Smoke test suite', () => {
 
         // What is the name of the group of narrow barrier islands on North Carolina’s Atlantic coast where
         // the Wright Brothers famously piloted the first airplane in 1903?
+        trainingPage.checkIfQuestionAppeared('What is the name of the group of narrow barrier islands on North Carolina’s Atlantic coast where the Wright Brothers famously piloted the first airplane in 1903?');
         trainingPage.clickCorrectAnswer(2);
         trainingPage.clickButtonNext();
 
@@ -436,6 +471,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which South Carolina destination is not known primarily as a popular golf and beach resort?
+        trainingPage.checkIfQuestionAppeared('Which South Carolina destination is not known primarily as a popular golf and beach resort?');
         trainingPage.clickCorrectAnswer(0);
         trainingPage.clickButtonNext();
 
@@ -444,6 +480,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which Tennessee city is home to the Country Music Hall of Fame and the Grand Ole Opry?
+        trainingPage.checkIfQuestionAppeared('Which Tennessee city is home to the Country Music Hall of Fame and the Grand Ole Opry?');
         trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
@@ -453,6 +490,7 @@ describe('Smoke test suite', () => {
 
         // Virginia is one of the original 13 colonies and the birthplace of 8 U.S. presidents.
         // Which destinations offer a window into the country’s colonial past?
+        trainingPage.checkIfQuestionAppeared('Virginia is one of the original 13 colonies and the birthplace of 8 U.S. presidents. Which destinations offer a window into the country’s colonial past?');
         trainingPage.clickCorrectAnswer(4);
         trainingPage.clickButtonNext();
 
@@ -461,6 +499,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // West Virginia is renowned for which types of outdoor recreation?
+        trainingPage.checkIfQuestionAppeared('West Virginia is renowned for which types of outdoor recreation? (check all that apply)');
         trainingPage.clickOnEachAnswer(0, 1, 2, 3);
         trainingPage.clickButtonNext();
 
@@ -476,8 +515,8 @@ describe('Smoke test suite', () => {
         trainingPage.skipTimeToVideoEnd();
         trainingPage.clickButtonNext();
 
-        // Welcome To The Northeast
-        trainingPage.checkIfArticleAppeared('Welcome To The Northeast');
+        // Welcome to the Northeast
+        trainingPage.checkIfArticleAppeared('Welcome to the Northeast');
         trainingPage.clickButtonNext();
 
         // Connecticut
@@ -486,6 +525,7 @@ describe('Smoke test suite', () => {
 
         // Near what classic New England port will visitors find the expansive casino resort
         // complexes Foxwoods and Mohegan Sun?
+        // trainingPage.checkIfQuestionAppeared('Near what classic New England port will visitors find the expansive casino resort complexes Foxwoods and Mohegan Sun?');
         trainingPage.selectItemFromDropDownByIndex(4);
         trainingPage.clickButtonNext();
 
@@ -494,6 +534,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which of the following is NOT a popular beach resort along the Atlantic coast in Delaware?
+        trainingPage.checkIfQuestionAppeared('Which of the following is NOT a popular beach resort along the Atlantic coast in Delaware?');
         trainingPage.clickCorrectAnswer(1);
         trainingPage.clickButtonNext();
 
@@ -503,6 +544,7 @@ describe('Smoke test suite', () => {
 
         // Almost how much of the nation’s stock of fresh lobster comes from the state of Maine?
         // 90
+        trainingPage.checkIfQuestionAppeared('Almost how much of the nation’s stock of fresh lobster comes from the state of Maine?');
         trainingPage.clickWheelTimes(0, 9);
 
         trainingPage.clickWheelSubmitButton();
@@ -514,6 +556,7 @@ describe('Smoke test suite', () => {
 
         // Which two Maryland cities sit on the Chesapeake Bay, offering thriving city life
         // with sea views and much to see, do, and eat?
+        trainingPage.checkIfQuestionAppeared('Which two Maryland cities sit on the Chesapeake Bay, offering thriving city life with sea views and much to see, do, and eat?');
         trainingPage.clickOnEachAnswer(0, 1);
         trainingPage.clickButtonNext();
 
@@ -522,6 +565,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // At which places can visitors learn more about the crucial role Massachusetts played in the USA’s history?
+        trainingPage.checkIfQuestionAppeared('At which places can visitors learn more about the crucial role Massachusetts played in the USA’s history? (check all that apply)');
         trainingPage.clickOnEachAnswer(0, 1, 2, 3);
         trainingPage.clickButtonNext();
 
@@ -531,6 +575,7 @@ describe('Smoke test suite', () => {
 
         // Portsmouth, a charming waterfront city on the Piscataqua River,
         // was one of the first dots on the U.S. map, founded in what year?
+        trainingPage.checkIfQuestionAppeared('Portsmouth, a charming waterfront city on the Piscataqua River, was one of the first dots on the U.S. map, founded in what year?');
         trainingPage.clickCorrectAnswer(2);
         trainingPage.clickButtonNext();
 
@@ -539,6 +584,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which popular New Jersey city offers stunning views of the Manhattan skyline over the Hudson River?
+        trainingPage.checkIfQuestionAppeared('Which popular New Jersey city offers stunning views of the Manhattan skyline over the Hudson River?');
         trainingPage.clickCorrectAnswer(2);
         trainingPage.clickButtonNext();
 
@@ -548,6 +594,7 @@ describe('Smoke test suite', () => {
 
         // Which area of New York state, outside of New York City, can visitors find a rugged mountainous and
         // lake-filled region with an expansive park where winter sports and wilderness await?
+        trainingPage.checkIfQuestionAppeared('Which area of New York state, outside of New York City, can visitors find a rugged mountainous and lake-filled region with an expansive park where winter sports and wilderness await?');
         trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
@@ -556,6 +603,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which of the following statements are true about Philadelphia? (check all that apply)
+        trainingPage.checkIfQuestionAppeared('Which of the following statements are true about Philadelphia? (check all that apply)');
         trainingPage.clickOnEachAnswer(1, 2, 3, 4);
         trainingPage.clickButtonNext();
 
@@ -564,6 +612,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which Rhode Island coastal city was a popular summer resort for wealthy Americans during the late 19th century?
+        trainingPage.checkIfQuestionAppeared('Which Rhode Island coastal city was a popular summer resort for wealthy Americans during the late 19th century?');
         trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
@@ -572,6 +621,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // True or false? Scenic Vermont is the second least-populated state in the entire USA behind Wyoming.
+        trainingPage.checkIfQuestionAppeared('True or false? Scenic Vermont is the second least-populated state in the entire USA behind Wyoming.');
         trainingPage.clickCorrectAnswer(0);
         trainingPage.clickButtonNext();
 
@@ -591,8 +641,8 @@ describe('Smoke test suite', () => {
         trainingPage.skipTimeToVideoEnd();
         trainingPage.clickButtonNext();
 
-        // Welcome To The Territories
-        trainingPage.checkIfArticleAppeared('Welcome To The Territories');
+        // Welcome to the Territories
+        trainingPage.checkIfArticleAppeared('Welcome to the Territories');
         trainingPage.clickButtonNext();
 
         // American Samoa
@@ -601,6 +651,7 @@ describe('Smoke test suite', () => {
 
         // There are more than how many historical sites across tiny American Samoa, including
         // remains at the world’s busiest airport during WWII?
+        trainingPage.checkIfQuestionAppeared('There are more than how many historical sites across tiny American Samoa, including remains at the world’s busiest airport during WWII?');
         trainingPage.clickWheelTimes(0, 6);
         trainingPage.clickWheelSubmitButton();
         trainingPage.clickButtonNext();
@@ -610,6 +661,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // In what region of Guam will visitors experience the indigenous Chamorro culture at its best?
+        trainingPage.checkIfQuestionAppeared('In what region of Guam will visitors experience the indigenous Chamorro culture at its best?');
         trainingPage.clickCorrectAnswer(3);
         trainingPage.clickButtonNext();
 
@@ -617,7 +669,8 @@ describe('Smoke test suite', () => {
         trainingPage.checkIfArticleAppeared('Northern Mariana Islands');
         trainingPage.clickButtonNext();
 
-        // Which activities can visitors to The Marianas enjoy?
+        // Which activities can visitors to the Marianas enjoy?
+        trainingPage.checkIfQuestionAppeared('Which activities can visitors to The Marianas enjoy? (check all that apply)');
         trainingPage.clickCorrectAnswer(4);
         trainingPage.clickButtonNext();
 
@@ -626,6 +679,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         // Which glowing natural attraction on an outer island of Puerto Rico is best experienced by kayak?
+        trainingPage.checkIfQuestionAppeared('Which glowing natural attraction on an outer island of Puerto Rico is best experienced by kayak?');
         trainingPage.clickCorrectAnswer(1);
         trainingPage.clickButtonNext();
 
@@ -635,6 +689,7 @@ describe('Smoke test suite', () => {
 
         // Which U.S. Virgin Island has the international airport and capital, Charlotte Amalie,
         // also known as the shopping capital of the Caribbean?
+        trainingPage.checkIfQuestionAppeared('Which U.S. Virgin Island has the international airport and capital, Charlotte Amalie, also known as the shopping capital of the Caribbean?');
         trainingPage.clickCorrectAnswer(0);
         trainingPage.clickButtonNext();
 
