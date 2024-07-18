@@ -123,8 +123,6 @@ class TrainingPage {
     }
 
     getButtonNext() {
-        // cy.wait(10000);
-
         return cy.get(this.buttonNext, {timeout: this.timeout});
     }
 
@@ -153,12 +151,12 @@ class TrainingPage {
     }
 
     clickCorrectAnswer(number) {
-        cy.log(`clicking on ${number} answer`);
+        cy.log(`Clicking on ${number} answer`);
         this.getAnswerByNumber(number).click();
     }
 
     clickOnSecondImage() {
-        cy.log(`clicking on second image`);
+        cy.log(`Clicking on second image`);
         this.getSecondImageQuestionAnswer().click();
     }
 
@@ -177,7 +175,7 @@ class TrainingPage {
     }
 
     checkIfArticleAppeared(title) {
-        cy.log(`Checing if article ${title} appeared`);
+        cy.log(`Checking if article ${title} appeared`);
         return this.getArticleTitle(title).should('be.visible');
     }
 
@@ -205,7 +203,7 @@ class TrainingPage {
     }
 
     clickOnEachAnswer(...ids) {
-        cy.log(`clicking on ${ids.join(', ')}`);
+        cy.log(`Clicking on ${ids.join(', ')}`);
         ids.forEach(id => {
             this.getAnswerByNumber(id).click();
         });
