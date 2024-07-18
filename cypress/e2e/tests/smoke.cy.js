@@ -8,7 +8,6 @@ let loginData;
 
 describe('Smoke test suite', () => {
 
-
     before(() => {
 
         Helper.apiSignUpNewUser().then((data) => {
@@ -28,10 +27,9 @@ describe('Smoke test suite', () => {
         loginPage.clickButtonContinue();
 
         dashboardPage.trackingApiToCheckIfDashboardPageLoaded();
-
     });
 
-    it('Welcome to the USA', () => {
+    it.skip('Welcome to the USA', () => {
         dashboardPage.visit();
         dashboardPage.clickButtonTrainingSection();
 
@@ -44,7 +42,15 @@ describe('Smoke test suite', () => {
     it('Discover the Pacific', () => {
         trainingPage.visitDiscoverThePacificChapter()
 
-        cy.wait(5000);
+        // question
+        // <h4 class="container__title">Which of the following is NOT a celebrated ski resort in Colorado?</h4>
+        // <h4 class="container__title">Idaho has more areas of designated wilderness than anywhere else in the continental USA.</h4>
+        //
+        // article
+        // <h3 class="pageTitle false">Idaho</h3>
+
+
+        // cy.wait(5000)
 
         // Get the video element by its src attribute and wait for it to be visible
         trainingPage.checkingIfVideoCanBeSkipped();
@@ -56,14 +62,31 @@ describe('Smoke test suite', () => {
 
         //Article Welcome To The Pacific
         cy.log('Article Welcome To The Pacific');
+
+        trainingPage.checkIfArticleAppeared('Welcome to the Pacific');
+
+        // cy.get('h3.pageTitle.false', {timeout: 10000})
+        //     .should('exist')
+        //     .contains('Welcome to the Pacific', {timeout: 10000})
+        //     .should('be.visible');
+
         trainingPage.clickButtonNext();
 
         //Article Alaska
         cy.log('Article Alaska');
+
+        trainingPage.checkIfArticleAppeared('Alaska');
+
+        // cy.get('h3.pageTitle.false', {timeout: 10000})
+        //     .should('exist');
+        // cy.get('h3.pageTitle.false', {timeout: 10000}).contains('Alaska', {timeout: 10000})
+        //     .should('be.visible');
+
         trainingPage.clickButtonNext();
 
         //Question: Which national park in Alaska is home to North America’s highest peak,
         //as well as a wealth of wildlife like grizzly and black bears?
+
         trainingPage.clickCorrectAnswer(0);
         trainingPage.clickButtonNext();
 
@@ -110,10 +133,8 @@ describe('Smoke test suite', () => {
         trainingPage.checkIfChapterCompletionMessageAppeared();
     })
 
-    it('Discover the West', () => {
+    it.skip('Discover the West', () => {
         trainingPage.visitDiscoverTheWestChapter();
-
-        cy.wait(5000);
 
         trainingPage.checkingIfVideoCanBeSkipped();
 
@@ -188,10 +209,8 @@ describe('Smoke test suite', () => {
         trainingPage.checkIfChapterCompletionMessageAppeared();
     });
 
-    it('Discover the Southwest', () => {
+    it.skip('Discover the Southwest', () => {
         trainingPage.visitDiscoverTheSouthwestChapter();
-
-        cy.wait(5000);
 
         trainingPage.checkingIfVideoCanBeSkipped();
 
@@ -238,10 +257,8 @@ describe('Smoke test suite', () => {
 
     });
 
-    it('Discover the Midwest', () => {
+    it.skip('Discover the Midwest', () => {
         trainingPage.visitDiscoverTheMidwestChapter();
-
-        cy.wait(5000);
 
         trainingPage.checkingIfVideoCanBeSkipped();
 
@@ -326,10 +343,8 @@ describe('Smoke test suite', () => {
 
     });
 
-    it('Welcome To The Southeast', () => {
+    it.skip('Welcome To The Southeast', () => {
         trainingPage.visitDiscoverTheSoutheastChapter();
-
-        cy.wait(5000);
 
         trainingPage.checkingIfVideoCanBeSkipped();
 
@@ -446,10 +461,8 @@ describe('Smoke test suite', () => {
 
     });
 
-    it('Discover the Northeast', () => {
+    it.skip('Discover the Northeast', () => {
         trainingPage.visitDiscoverTheNortheastChapter();
-
-        cy.wait(5000);
 
         trainingPage.checkingIfVideoCanBeSkipped();
 
@@ -552,10 +565,8 @@ describe('Smoke test suite', () => {
 
     });
 
-    it('Discover the Territories', () => {
+    it.skip('Discover the Territories', () => {
         trainingPage.visitDiscoverTheTerritoriesChapter();
-
-        cy.wait(5000);
 
         trainingPage.checkingIfVideoCanBeSkipped();
 

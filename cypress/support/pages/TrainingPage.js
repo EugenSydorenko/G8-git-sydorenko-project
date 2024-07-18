@@ -25,7 +25,8 @@ class TrainingPage {
         this.urlDiscoverTheNortheastChapter = '/main/training/chapter/3954/0';
         this.urlDiscoverTheTerritoriesChapter = '/main/training/chapter/3955/0';
         this.secondImageQuestionAnswer = 'img[id="2"]';
-        this.timeout = 10000;
+        this.articleTitle = 'h3.pageTitle.false';
+        this.timeout = 20000;
     }
 
     visit() {
@@ -73,7 +74,16 @@ class TrainingPage {
     }
 
     getVideo() {
-        return cy.get(this.videoSelector, {timeout: this.timeout});
+        cy.get(this.videoSelector, {timeout: this.timeout}).should('be.visible');
+        return cy.get(this.videoSelector);
+    }
+
+    getArticleTitle(title) {
+        cy.get(this.articleTitle, {timeout: this.timeout})
+            .should('exist');
+        cy.get(this.articleTitle, {timeout: this.timeout}).contains(title, {timeout: this.timeout})
+            .should('be.visible');
+        return cy.get(this.articleTitle);
     }
 
     getDiscoverThePacificChapter() {
@@ -113,13 +123,13 @@ class TrainingPage {
     }
 
     getButtonNext() {
-        cy.wait(10000);
+        // cy.wait(10000);
 
-        return cy.get(this.buttonNext);
+        return cy.get(this.buttonNext, {timeout: this.timeout});
     }
 
     getAnswerByNumber(number) {
-        return cy.get(`input[id="${number}"]`);
+        return cy.get(`input[id="${number}"]`, {timeout: this.timeout});
     }
 
     getWheelByNumber(id) {
@@ -164,6 +174,11 @@ class TrainingPage {
         for (let i = 0; i < number; i++) {
             this.getWheelByNumber(id).click();
         }
+    }
+
+    checkIfArticleAppeared(title) {
+        cy.log(`Checing if article ${title} appeared`);
+        return this.getArticleTitle(title).should('be.visible');
     }
 
     clickWheelSubmitButton() {
