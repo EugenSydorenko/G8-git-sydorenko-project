@@ -1,4 +1,6 @@
 {
-  "email": "autotest1@testpromobile.com",
-  "password": "Password"
+  "url": {
+    "articleTitle": "Sample Article Title",
+    "articleContent": "This is the content of the sample article."
+  }
 }

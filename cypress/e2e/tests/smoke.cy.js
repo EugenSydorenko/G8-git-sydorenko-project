@@ -39,7 +39,8 @@ describe('Smoke test suite', () => {
         trainingPage.skipTimeToVideoEnd();
     });
 
-    it('Discover the Pacific', () => {
+    it.only('Discover the Pacific', () => {
+        cy.intercept('https://login.travpromobile.com/api/getUser/?app_id=**').as('api');
         trainingPage.visitDiscoverThePacificChapter()
 
         trainingPage.checkingIfVideoCanBeSkipped();
@@ -49,23 +50,31 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
 
         //Article Welcome to the Pacific
+        cy.url().should('include', '/3949/1');
         // trainingPage.checkIfArticleAppeared('Welcome to the Pacific');
         trainingPage.clickButtonNext();
+        cy.wait(['@api','@api']);
 
         //Article Alaska
         // trainingPage.checkIfArticleAppeared('Alaska');
+        cy.url().should('include', '/3949/2');
         trainingPage.clickButtonNext();
+        cy.wait(['@api','@api']);
 
         //Question: Which national park in Alaska is home to North America’s highest peak,
         //as well as a wealth of wildlife like grizzly and black bears?
 
         // trainingPage.checkIfQuestionAppeared('Which national park in Alaska is home to North America’s highest peak, as well as a wealth of wildlife like grizzly and black bears?');
+        cy.url().should('include', '/3949/3');
+        cy.wait(['@api','@api']);
         trainingPage.clickCorrectAnswer(0);
         trainingPage.clickButtonNext();
 
         //Article California
         // trainingPage.checkIfArticleAppeared('California');
+        cy.url().should('include', '/3949/4');
         trainingPage.clickButtonNext();
+        cy.wait(['@api','@api']);
 
         //Question: California has vineyards in 48 of its 58 counties and produces what percentage of the USA’s wine supply?
 
@@ -74,39 +83,55 @@ describe('Smoke test suite', () => {
         trainingPage.clickWheelTimes(0, 9);
 
         trainingPage.clickWheelSubmitButton();
-
+        cy.url().should('include', '/3949/5');
         trainingPage.clickButtonNext();
+        cy.wait(['@api','@api']);
 
         //Article Hawai’i
         // trainingPage.checkIfArticleAppeared('Hawai’i');
+        cy.url().should('include', '/3949/6');
+        
         trainingPage.clickButtonNext();
+        cy.wait(['@api','@api']);
 
         //Question: Which island has a National Park with five colossal peaks including the dormant Maunakea,
         // where visitors can hike and ski.
         // trainingPage.checkIfQuestionAppeared('Which island has a National Park with five colossal peaks including the dormant Maunakea, where visitors can hike and ski.');
         trainingPage.clickCorrectAnswer(3);
+        cy.url().should('include', '/3949/7');
         trainingPage.clickButtonNext();
+        cy.wait(['@api','@api']);
 
         //Article Oregon
         // trainingPage.checkIfArticleAppeared('Oregon');
+        cy.url().should('include', '/3949/8');
         trainingPage.clickButtonNext();
+        cy.wait(['@api','@api']);
 
         //Question: What is the name of the deepest gorge in North America, which is deeper than the Grand Canyon?
         // trainingPage.checkIfQuestionAppeared('What is the name of the deepest gorge in North America, which is deeper than the Grand Canyon?');
         trainingPage.clickCorrectAnswer(2);
+        cy.url().should('include', '/3949/9');
         trainingPage.clickButtonNext();
+        cy.wait(['@api','@api']);
 
         //Article Washington State
         // trainingPage.checkIfArticleAppeared('Washington State');
+        cy.url().should('include', '/3949/10');
         trainingPage.clickButtonNext();
+        cy.wait(['@api','@api']);
 
         //Question: Washington is the only state in the “lower 48” where
         // visitors can do which of the following all in one day?
         // trainingPage.checkIfQuestionAppeared('Washington is the only state in the “lower 48” where visitors can do which of the following all in one day? (check all that apply)');
         trainingPage.clickOnEachAnswer(0, 1, 2);
+        cy.url().should('include', '/3949/11');
         trainingPage.clickButtonNext();
+        cy.wait(['@api','@api']);
 
         //Check if Chapter Completed button appeared
+        cy.url().should('include', '/3949/12');
+        cy.wait(['@api','@api']);
         trainingPage.checkIfChapterCompletionMessageAppeared();
     })
 
