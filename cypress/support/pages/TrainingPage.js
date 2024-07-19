@@ -1,3 +1,5 @@
+import articleData from '../../fixtures/articleData.json'
+
 class TrainingPage {
 
     constructor() {
@@ -303,6 +305,26 @@ class TrainingPage {
                 });
             });
     }
+
+    // checkArticleContentInJSON() {
+    //     // Get the current URL and extract the relevant part
+    //     cy.url().then((url) => {
+    //         const urlPath = new URL(url).pathname.replace('/main/training/chapter', '');
+    //         cy.log(`Created URL ${urlPath}`);
+    //         // Log the article data for debugging
+    //         cy.log(JSON.stringify(articleData, null, 2));
+    //
+    //         // Find the article data in the JSON file
+    //         const article = articleData[urlPath];
+    //
+    //         // Check if article data exists
+    //         expect(article).to.not.be.undefined;
+    //
+    //         // Verify articleTitle and articleContent on the page
+    //         cy.contains(article.articleTitle).should('be.visible');
+    //         cy.contains(article.articleContent).should('be.visible');
+    //     });
+    // }
 
 }
 
