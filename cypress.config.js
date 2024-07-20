@@ -10,7 +10,5 @@ module.exports = defineConfig({
         setupNodeEvents(on, config) {
             allureCypress(on);
         },
-        video: true,
-        videosFolder: 'cypress/videos'
     },
 });
