@@ -36,7 +36,7 @@ describe('Smoke test suite', () => {
         trainingPage.skipTimeToVideoEnd();
     });
 
-    it.only('Discover the Pacific', () => {
+    it('Discover the Pacific', () => {
         trainingPage.visitDiscoverThePacificChapter()
 
         trainingPage.checkingIfVideoCanBeSkipped();
