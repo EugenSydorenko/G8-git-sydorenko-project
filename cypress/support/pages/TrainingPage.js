@@ -128,7 +128,6 @@ class TrainingPage {
     }
 
     getButtonNext() {
-        // cy.wait(10000);
         return cy.get(this.buttonNext, {timeout: this.timeout});
     }
 

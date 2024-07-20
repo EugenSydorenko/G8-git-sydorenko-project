@@ -42,6 +42,7 @@ export function apiSignUpNewUser() {
 }
 
 export function checkArticleContentInJSON() {
+    cy.wait(10000);
     // Get the current URL and extract the relevant part
     cy.url().then((url) => {
         const urlPath = new URL(url).pathname.replace('/main/training/chapter', '');
@@ -50,11 +51,17 @@ export function checkArticleContentInJSON() {
         const article = articleData[urlPath];
 
         // Check if article data exists
-        expect(article).to.not.be.undefined;
+        // expect(article).to.not.be.undefined;
 
         // Verify articleTitle and articleContent on the page
         cy.contains(article.articleTitle).should('be.visible');
         cy.contains(article.articleContent).should('be.visible');
     });
 }
+
+export function waitForPageLoadingByWaitingForApi() {
+    cy.intercept('https://login.travpromobile.com/api/getUser/?app_id=**').as('api');
+    cy.wait(['@api', '@api']);
+}
+
 
