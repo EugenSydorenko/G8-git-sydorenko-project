@@ -42,7 +42,7 @@ export function apiSignUpNewUser() {
 }
 
 export function checkArticleContentInJSON() {
-    cy.wait(10000);
+    // cy.wait(10000);
     // Get the current URL and extract the relevant part
     cy.url().then((url) => {
         const urlPath = new URL(url).pathname.replace('/main/training/chapter', '');
