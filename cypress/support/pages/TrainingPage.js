@@ -1,18 +1,9 @@
-import articleData from '../../fixtures/articleData.json'
-
 class TrainingPage {
 
     constructor() {
         this.videoTrainingSection = 'video[src="https://s3.amazonaws.com/developertool/1441/1713213550-1712955815-chapter1autoplay.mp4"][preload="auto"][autoplay][controls]';
         this.videoSelector = 'video';
         this.buttonSlector = 'button[type="button"]';
-        this.discoverThePacificChapter = 'div#ch3949';
-        this.discoverTheWest = 'div#ch3950';
-        this.discoverTheSouthwest = 'div#ch3951';
-        this.discoverTheMidwest = 'div#ch3952';
-        this.discoverTheSoutheast = 'div#ch3953';
-        this.discoverTheNortheast = 'div#ch3954';
-        this.discoverTheTerritories = 'div#ch3955';
         this.buttonNext = 'button#nextButtonfalse';
         this.successfulCompletionMessage = 'button#nextButtonfalse.navigationButton.next';
         this.buttonPlus = 'button[id="plus"]';
@@ -27,8 +18,6 @@ class TrainingPage {
         this.urlDiscoverTheNortheastChapter = '/main/training/chapter/3954/0';
         this.urlDiscoverTheTerritoriesChapter = '/main/training/chapter/3955/0';
         this.secondImageQuestionAnswer = 'img[id="2"]';
-        this.articleTitle = 'h3.pageTitle.false';
-        this.questionTitle = 'h4.container__title';
         this.timeout = 20000;
     }
 
@@ -81,46 +70,8 @@ class TrainingPage {
         return cy.get(this.videoSelector);
     }
 
-    getArticleTitle() {
-        cy.get(this.articleTitle, {timeout: this.timeout});
-        return cy.get(this.articleTitle);
-    }
-
-    getQuestionTitle() {
-        cy.get(this.questionTitle, {timeout: this.timeout});
-        return cy.get(this.questionTitle);
-    }
-
-    getDiscoverThePacificChapter() {
-        return cy.get(this.discoverThePacificChapter, {timeout: this.timeout});
-    }
-
     getSecondImageQuestionAnswer() {
         return cy.get(this.secondImageQuestionAnswer, {timeout: this.timeout});
-    }
-
-    getDiscoverTheSouthwest() {
-        return cy.get(this.discoverTheSouthwest, {timeout: this.timeout});
-    }
-
-    getDiscoverTheMidwest() {
-        return cy.get(this.discoverTheMidwest, {timeout: this.timeout});
-    }
-
-    getDiscoverTheSoutheast() {
-        return cy.get(this.discoverTheSoutheast, {timeout: this.timeout});
-    }
-
-    getDiscoverTheWest() {
-        return cy.get(this.discoverTheWest, {timeout: this.timeout});
-    }
-
-    getDiscoverTheNortheast() {
-        return cy.get(this.discoverTheNortheast, {timeout: this.timeout});
-    }
-
-    getDiscoverTheTerritories() {
-        return cy.get(this.discoverTheTerritories, {timeout: this.timeout});
     }
 
     getWheelSubmitButton() {
@@ -179,35 +130,6 @@ class TrainingPage {
         }
     }
 
-    checkIfArticleAppeared(expectedTitle) {
-        cy.log(`Checking if article "${expectedTitle}" appeared`);
-
-        this.getArticleTitle().then(($title) => {
-            const actualTitle = $title.text().trim();
-
-            if (actualTitle !== expectedTitle) {
-                cy.log(`Expected title: "${expectedTitle}", but found: "${actualTitle}"`);
-            }
-
-            expect(actualTitle).to.equal(expectedTitle);
-        });
-    }
-
-    checkIfQuestionAppeared(expectedTitle) {
-
-        cy.log(`Checking if question "${expectedTitle}" appeared`);
-
-        this.getQuestionTitle().then(($title) => {
-            const actualTitle = $title.text().trim();
-
-            if (actualTitle !== expectedTitle) {
-                cy.log(`Expected title: "${expectedTitle}", but found: "${actualTitle}"`);
-            }
-
-            expect(actualTitle).to.equal(expectedTitle);
-        });
-    }
-
     clickWheelSubmitButton() {
         this.getWheelSubmitButton().click();
     }
@@ -243,41 +165,6 @@ class TrainingPage {
             .and('have.text', 'Chapter Completed!');
     }
 
-    clickOnDiscoverThePacificChapter() {
-        cy.log(`Click On Discover The Pacific Chapter`);
-        return this.getDiscoverThePacificChapter().click();
-    }
-
-    clickOnDiscoverTheWest() {
-        cy.log(`Click On Discover The West`);
-        return this.getDiscoverTheWest().click();
-    }
-
-    clickOnDiscoverTheSouthwest() {
-        cy.log(`Click On Discover The Southwest`);
-        return this.getDiscoverTheSouthwest().click();
-    }
-
-    clickOnDiscoverTheSoutheast() {
-        cy.log(`Click On Discover The Southeast`);
-        return this.getDiscoverTheSoutheast().click();
-    }
-
-    clickOnDiscoverTheMidwest() {
-        cy.log(`Click On Discover The Midwest`);
-        return this.getDiscoverTheMidwest().click();
-    }
-
-    clickOnDiscoverTheNortheast() {
-        cy.log(`Click On Discover The Northeast`);
-        return this.getDiscoverTheNortheast().click();
-    }
-
-    clickOnDiscoverTheTerritories() {
-        cy.log(`Click On Discover The Territories`);
-        return this.getDiscoverTheTerritories().click();
-    }
-
     clickButtonNext() {
         cy.log('Click on button next');
         return this.getButtonNext().click();
@@ -304,26 +191,6 @@ class TrainingPage {
                 });
             });
     }
-
-    // checkArticleContentInJSON() {
-    //     // Get the current URL and extract the relevant part
-    //     cy.url().then((url) => {
-    //         const urlPath = new URL(url).pathname.replace('/main/training/chapter', '');
-    //         cy.log(`Created URL ${urlPath}`);
-    //         // Log the article data for debugging
-    //         cy.log(JSON.stringify(articleData, null, 2));
-    //
-    //         // Find the article data in the JSON file
-    //         const article = articleData[urlPath];
-    //
-    //         // Check if article data exists
-    //         expect(article).to.not.be.undefined;
-    //
-    //         // Verify articleTitle and articleContent on the page
-    //         cy.contains(article.articleTitle).should('be.visible');
-    //         cy.contains(article.articleContent).should('be.visible');
-    //     });
-    // }
 
 }
 
