@@ -50,9 +50,6 @@ export function checkArticleContentInJSON() {
         // Find the article data in the JSON file
         const article = articleData[urlPath];
 
-        // Check if article data exists
-        // expect(article).to.not.be.undefined;
-
         // Verify articleTitle and articleContent on the page
         cy.contains(article.articleTitle).should('be.visible');
         cy.contains(article.articleContent).should('be.visible');

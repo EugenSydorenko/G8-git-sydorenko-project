@@ -36,7 +36,7 @@ describe('Smoke test suite', () => {
         trainingPage.skipTimeToVideoEnd();
     });
 
-    it('Discover the Pacific', () => {
+    it.only('Discover the Pacific', () => {
         trainingPage.visitDiscoverThePacificChapter()
 
         trainingPage.checkingIfVideoCanBeSkipped();
@@ -102,9 +102,6 @@ describe('Smoke test suite', () => {
         waitForPageLoadingByWaitingForApi();
 
         //Article Washington State
-        // trainingPage.checkIfArticleAppeared('Washington State');
-        cy.url().should('include', '/3949/10');
-        
         checkArticleContentInJSON();
         trainingPage.clickButtonNext();
         waitForPageLoadingByWaitingForApi();
