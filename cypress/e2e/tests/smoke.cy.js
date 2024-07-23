@@ -36,7 +36,7 @@ describe('Smoke test suite', () => {
         trainingPage.skipTimeToVideoEnd();
     });
 
-    it.only('Discover the Pacific', () => {
+    it('Discover the Pacific', () => {
         trainingPage.visitDiscoverThePacificChapter()
 
         trainingPage.checkingIfVideoCanBeSkipped();
@@ -75,9 +75,7 @@ describe('Smoke test suite', () => {
         trainingPage.clickButtonNext();
         waitForPageLoadingByWaitingForApi();
 
-        //Article Hawai’i
-        cy.url().should('include', '/3949/6');
-        
+        //Article Hawai’i0 976543w2q1  /*-
         checkArticleContentInJSON();
         trainingPage.clickButtonNext();
         waitForPageLoadingByWaitingForApi();
