@@ -27,7 +27,7 @@ jobs:
     env:
       PROD_URL: https://usadiscoveryprogram.com
       DEV_URL: https://brand-usa-dev.netlify.app
-      BASE_URL: ${{ inputs.environment == 'dev' && env.DEV_URL || env.PROD_URL }}
+      run: echo "BASE_URL=${{ github.event.inputs.environment == 'dev' && env.DEV_URL || env.PROD_URL }}" >> $GITHUB_ENV
     steps:
       - name: Checkout
         uses: actions/checkout@v4
