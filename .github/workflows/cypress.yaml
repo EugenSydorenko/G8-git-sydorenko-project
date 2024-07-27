@@ -28,7 +28,6 @@ jobs:
     env:
       PROD_URL: https://usadiscoveryprogram.com/
       DEV_URL: https://brand-usa-dev.netlify.app/
-      BASE_URL: ${{ inputs.environment == 'dev' && env.DEV_URL || env.PROD_URL }}
 
     steps:
       - name: Checkout
@@ -42,10 +41,13 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Set Base URL
+        run: echo "BASE_URL=${{ github.event.inputs.environment == 'dev' && env.DEV_URL || env.PROD_URL }}" >> $GITHUB_ENV
+
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          browser: ${{ inputs.browser || 'chrome' }}
+          browser: ${{ github.event.inputs.browser || 'chrome' }}
           start: npm start  # Adjust if you have a different command to start your app
 
       - name: Get Allure history
