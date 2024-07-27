@@ -1,9 +1,7 @@
 name: Cypress Tests
 
 on:
-  pull_request:
-    branches:
-      - main  # Replace with your default branch if it's different
+  push:
   workflow_dispatch:
     inputs:
       browser:
@@ -14,41 +12,18 @@ on:
           - chrome
           - firefox
           - edge
-      environment:
-        description: 'Please select environment for test run'
-        required: true
-        type: choice
-        options:
-          - prod
-          - dev
 
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
-    env:
-      PROD_URL: https://usadiscoveryprogram.com/
-      DEV_URL: https://brand-usa-dev.netlify.app/
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14'  # Specify your Node.js version
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Set Base URL
-        run: echo "BASE_URL=${{ github.event.inputs.environment == 'dev' && env.DEV_URL || env.PROD_URL }}" >> $GITHUB_ENV
-
-      - name: Run Cypress Tests
+      - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          browser: ${{ github.event.inputs.browser || 'chrome' }}
-          start: npm start  # Adjust if you have a different command to start your app
+          browser: ${{ inputs.browser || 'chrome'}}
 
       - name: Get Allure history
         uses: actions/checkout@v2
